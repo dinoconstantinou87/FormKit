@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FormTextField: NSObject, FormRowType, UITextFieldDelegate {
+public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelegate {
  
     // MARK: - Properties
     
@@ -45,6 +45,13 @@ public class FormTextField: NSObject, FormRowType, UITextFieldDelegate {
         cell.textField.text = value as? String
         cell.textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         cell.textField.addTarget(self, action: "textChanged:", forControlEvents: .EditingChanged)
+    }
+    
+    // MARK: - FormRowTypeInteractable
+    
+    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell) {
+        guard let cell = abstract as? FormTextFieldCell else { fatalError("Encountered unexpected cell type for FormTextField") }
+        cell.textField.becomeFirstResponder()
     }
 
 }

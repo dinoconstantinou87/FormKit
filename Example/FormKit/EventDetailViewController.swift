@@ -64,6 +64,14 @@ class EventDetailViewController: FormViewController {
                 
                 return row
             }
+            
+            section.appendRow() {
+                let row = FormOptions(identifier: "repeats")
+                row.title = "Repeats"
+                row.options = [ "Never", "Every Day", "Every Week" ]
+                
+                return row
+            }
 
             return section
         }

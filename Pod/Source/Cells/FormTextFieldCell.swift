@@ -23,6 +23,8 @@ public class FormTextFieldCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        selectionStyle = .None
+ 
         contentView.addSubview(textField)
         textField.autoPinEdgesToSuperviewMargins()
     }
