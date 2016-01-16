@@ -14,7 +14,8 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     
     public var title: String?
     public var text: String?
-    
+    public var configure: ((cell: FormTextFieldCell) -> ())?
+
     public private(set) var identifier: String
     public var value: Any? {
         get {
@@ -35,7 +36,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     // MARK: - Internal Methods
     
     func textChanged(textField: UITextField) {
-        value = textField.text
+        text = textField.text
     }
 
     // MARK: - FormRowType
@@ -51,9 +52,11 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormTextFieldCell else { fatalError("Encountered unexpected cell type for FormTextField") }
         cell.textField.placeholder = title
-        cell.textField.text = value as? String
+        cell.textField.text = text
         cell.textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         cell.textField.addTarget(self, action: "textChanged:", forControlEvents: .EditingChanged)
+        
+        configure?(cell: cell)
     }
     
     // MARK: - FormRowTypeInteractable
