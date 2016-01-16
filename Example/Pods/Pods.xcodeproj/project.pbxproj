@@ -107,6 +107,8 @@
 		C2DFE59F5544BC82D26A0D139D8A25B8 /* FormKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C7542C3D8ACE5FCD209026F1D333C411 /* FormKit-dummy.m */; };
 		C322EEEEAE1C91BAF10A82B6FB89BCE5 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9E80802B0FCED701A4151D5B0365AF /* Closures.swift */; };
 		C63AB521EA514A811A167E507C0CF9AD /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9034C2E0EC333A6A427F097FC25F0F8 /* Expression.swift */; };
+		C98250891C4A60A200A0C2FB /* FormSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98250881C4A60A200A0C2FB /* FormSwitchCell.swift */; };
+		C982508B1C4A615C00A0C2FB /* FormSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C982508A1C4A615C00A0C2FB /* FormSwitch.swift */; };
 		C9AC658F3FCB67B50E96313C2687B33D /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567697BC53F6E2C43BF4986A413D94A2 /* MatcherProtocols.swift */; };
 		C9DD2AA81C4A5883009A92BF /* FormTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DD2AA71C4A5883009A92BF /* FormTextFieldCell.swift */; };
 		CAAED5FB81DB035A9EC080917C783FA6 /* AdapterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769A27CEDBE4E3A457A203E759CB525F /* AdapterProtocols.swift */; };
@@ -376,6 +378,8 @@
 		C7542C3D8ACE5FCD209026F1D333C411 /* FormKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FormKit-dummy.m"; sourceTree = "<group>"; };
 		C76A5E3C9174DD627A48BE8F5BE803C7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97CA0DB5A7BC1590BD41CBD63FFF4BB /* Pods-FormKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-FormKit_Tests.modulemap"; sourceTree = "<group>"; };
+		C98250881C4A60A200A0C2FB /* FormSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSwitchCell.swift; sourceTree = "<group>"; };
+		C982508A1C4A615C00A0C2FB /* FormSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSwitch.swift; sourceTree = "<group>"; };
 		C9DD2AA71C4A5883009A92BF /* FormTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldCell.swift; sourceTree = "<group>"; };
 		CA61418B69AAC74C19723D98A0823B35 /* NimbleSnapshotsConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NimbleSnapshotsConfiguration.swift; sourceTree = "<group>"; };
 		CB8B69129AEC5514778CBAA7F61DA22E /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+PureLayout.m"; path = "PureLayout/PureLayout/NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
@@ -559,6 +563,7 @@
 			children = (
 				BB45B79498CED1FEE5A4F05EC06291BD /* FormRowCell.swift */,
 				C9DD2AA71C4A5883009A92BF /* FormTextFieldCell.swift */,
+				C98250881C4A60A200A0C2FB /* FormSwitchCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -891,6 +896,7 @@
 				84BFE3F142AD6ADAE3237C6AA1DCF821 /* FormRow.swift */,
 				2DAD386F85615791CA57EEA9965EEBDC /* FormSection.swift */,
 				FC633A36C31DDC0A7A9289C3CC13D1DA /* FormTextField.swift */,
+				C982508A1C4A615C00A0C2FB /* FormSwitch.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1433,6 +1439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB0D41358C2CB60428B7765E3884BD2F /* Form.swift in Sources */,
+				C982508B1C4A615C00A0C2FB /* FormSwitch.swift in Sources */,
 				C9DD2AA81C4A5883009A92BF /* FormTextFieldCell.swift in Sources */,
 				C2DFE59F5544BC82D26A0D139D8A25B8 /* FormKit-dummy.m in Sources */,
 				344F824551D5BF47352CB277157E1052 /* FormRow.swift in Sources */,
@@ -1441,6 +1448,7 @@
 				609AC3C430E4B313A68DE528850FDCF0 /* FormSection.swift in Sources */,
 				8110E8DE669278A38793121F401D0717 /* FormTextField.swift in Sources */,
 				5C88D7ED61EBBB47D5129A5377493744 /* FormViewController.swift in Sources */,
+				C98250891C4A60A200A0C2FB /* FormSwitchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

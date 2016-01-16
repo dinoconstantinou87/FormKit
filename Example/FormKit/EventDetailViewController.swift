@@ -54,6 +54,20 @@ class EventDetailViewController: FormViewController {
             return section
         }
         
+        form.appendSection() {
+            
+            let section = FormSection()
+            
+            section.appendRow() {
+                let row = FormSwitch(identifier: "all_day")
+                row.title = "All Day"
+                
+                return row
+            }
+
+            return section
+        }
+        
         return form
     }
     
