@@ -9,12 +9,10 @@
 import UIKit
 
 public protocol FormRowType {
-
     var identifier: String { get }
-    var value: AnyObject? { get set }
+    var value: Any? { get set }
 
     func registerTableViewCellForTableView(tableView: UITableView)
     func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell
     func configureTableViewCell(cell: UITableViewCell)
-
 }

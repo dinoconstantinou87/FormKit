@@ -61,14 +61,16 @@ class EventDetailViewController: FormViewController {
             section.appendRow() {
                 let row = FormSwitch(identifier: "all_day")
                 row.title = "All Day"
+                row.on = true
                 
                 return row
             }
             
             section.appendRow() {
-                let row = FormOptions(identifier: "repeats")
+                let row = FormOptionList(identifier: "repeats")
                 row.title = "Repeats"
                 row.options = [ "Never", "Every Day", "Every Week" ]
+                row.selection = "Never"
                 
                 return row
             }

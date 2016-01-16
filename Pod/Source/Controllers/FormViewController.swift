@@ -62,7 +62,7 @@ public class FormViewController: UITableViewController {
         guard let row = form.rowForIndexPath(indexPath) as? FormRowTypeInteractable else { return }
         guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { fatalError("Expected table view cell to be returned for index path \(indexPath)") }
         
-        row.controller(self, didSelectCell: cell)
+        row.controller(self, didSelectCell: cell, forIndexPath: indexPath)
     }
 
 }

@@ -17,6 +17,15 @@ public class FormRowCell: UITableViewCell {
         
         return titleLabel
     }()
+    
+    public lazy var valueLabel: UILabel = {
+        let valueLabel = UILabel()
+        valueLabel.translatesAutoresizingMaskIntoConstraints = false
+        valueLabel.textAlignment = .Right
+        valueLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        
+        return valueLabel
+    }()
 
     // MARK: - Init
 
@@ -24,7 +33,13 @@ public class FormRowCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         contentView.addSubview(titleLabel)
-        titleLabel.autoPinEdgesToSuperviewMargins()
+        contentView.addSubview(valueLabel)
+        
+        titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Trailing)
+        
+        valueLabel.autoPinEdgeToSuperviewMargin(.Trailing)
+        valueLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+        valueLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: titleLabel)
     }
 
     required public init?(coder aDecoder: NSCoder) {

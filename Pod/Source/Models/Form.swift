@@ -33,16 +33,16 @@ public class Form {
     public func rowForIndexPath(indexPath: NSIndexPath) -> FormRowType {
         return sections[indexPath.section].rows[indexPath.row]
     }
+
+    public func rows() -> [ FormRowType ] {
+        return sections.map({ return $0.rows }).flatMap({ return $0 })
+    }
     
-    public func values() -> [ String: AnyObject? ] {
-        var values = [ String: AnyObject ]()
-        for section in sections {
-            for (key, value) in section.values() {
-                values[key] = value
-            }
+    public func values() -> [ String: Any? ] {
+        return rows().reduce([ String: Any? ]()) { (var values, row) in
+            values[row.identifier] = row.value
+            return values
         }
-        
-        return values
     }
 
 }

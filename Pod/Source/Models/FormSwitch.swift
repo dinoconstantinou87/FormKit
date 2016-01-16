@@ -8,14 +8,23 @@
 
 import Foundation
 
-public class FormSwitch: FormRowType {
+public class FormSwitch: NSObject, FormRowType {
     
     // MARK: - Properties
     
     public var title: String?
+    public var on: Bool = false
     
     public private(set) var identifier: String
-    public var value: AnyObject?
+    public var value: Any? {
+        get {
+            return on
+        }
+        
+        set {
+            on = (self.value as? Bool) == true
+        }
+    }
     
     // MARK: - Init
     
@@ -23,6 +32,12 @@ public class FormSwitch: FormRowType {
         self.identifier = identifier
     }
     
+    // MARK: - Internal Methods
+    
+    func valueChanged(control: UISwitch) {
+        on = control.on
+    }
+
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
@@ -36,7 +51,9 @@ public class FormSwitch: FormRowType {
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormSwitchCell else { fatalError("Encountered unexpected cell type for FormSwitch") }
         cell.titleLabel.text = title
-        cell.control.on = (self.value as? Bool) == true
+        cell.control.on = on
+        cell.control.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        cell.control.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
     }
     
 }

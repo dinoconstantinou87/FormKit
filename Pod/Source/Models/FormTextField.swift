@@ -13,9 +13,18 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     // MARK: - Properties
     
     public var title: String?
+    public var text: String?
     
     public private(set) var identifier: String
-    public var value: AnyObject?
+    public var value: Any? {
+        get {
+            return text
+        }
+        
+        set {
+            text = value as? String
+        }
+    }
     
     // MARK: - Init
     
@@ -49,7 +58,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     
     // MARK: - FormRowTypeInteractable
     
-    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell) {
+    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
         guard let cell = abstract as? FormTextFieldCell else { fatalError("Encountered unexpected cell type for FormTextField") }
         cell.textField.becomeFirstResponder()
     }

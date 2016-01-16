@@ -15,7 +15,7 @@ public class FormRow: FormRowType {
     public var title: String?
 
     public private(set) var identifier: String
-    public var value: AnyObject?
+    public var value: Any?
 
     // MARK: - Init
 

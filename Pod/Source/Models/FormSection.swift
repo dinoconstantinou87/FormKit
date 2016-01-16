@@ -30,13 +30,4 @@ public class FormSection {
         rows.append(row())
     }
     
-    public func values() -> [ String: AnyObject? ] {
-        var values = [ String: AnyObject ]()
-        for row in rows {
-            values[row.identifier] = row.value
-        }
-        
-        return values
-    }
-    
 }
