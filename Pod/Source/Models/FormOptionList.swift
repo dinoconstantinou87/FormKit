@@ -8,22 +8,20 @@
 
 import Foundation
 
-public class FormOptionList: FormRowTypeInteractable {
-    
-    // MARK: Types
-    
-    public enum SelectionType {
-        case Single
-        case Multiple
-    }
-    
+public enum SelectionType {
+    case Single
+    case Multiple
+}
+
+public class FormOptionList<T where T: Equatable, T: FormOptionType>: FormRowTypeInteractable {
+
     // MARK: - Properties
     
     public var title: String?
-    public var options = [ String ]()
+    public var options = [ T ]()
     
-    public var selection: String?
-    public var selections = [ String ]()
+    public var selection: T?
+    public var selections = [ T ]()
     
     public var selectionType: SelectionType = .Single
 
@@ -41,9 +39,9 @@ public class FormOptionList: FormRowTypeInteractable {
         set {
             switch selectionType {
                 case .Single:
-                    selection = value as? String
+                    selection = value as? T
                 case .Multiple:
-                    if let selections = value as? [ String ] {
+                    if let selections = value as? [ T ] {
                         self.selections = selections
                     }
             }
@@ -74,9 +72,9 @@ public class FormOptionList: FormRowTypeInteractable {
         
         switch selectionType {
             case .Single:
-                cell.valueLabel.text = selection
+                cell.valueLabel.text = selection?.stringRepresentation()
             case .Multiple:
-                cell.valueLabel.text = selections.joinWithSeparator(", ")
+                cell.valueLabel.text = selections.map({ $0.stringRepresentation() }).joinWithSeparator(", ")
         }
     }
     
@@ -85,7 +83,7 @@ public class FormOptionList: FormRowTypeInteractable {
     public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
         guard let navigationController = controller.navigationController else { fatalError("You must contain a form view controller within a navigation controller when using a form options row.") }
 
-        let viewController = FormOptionListViewController(style: .Grouped)
+        let viewController = FormOptionListViewController<T>(style: .Grouped)
         viewController.row = self
         viewController.selection = { [unowned self] in
             controller.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)

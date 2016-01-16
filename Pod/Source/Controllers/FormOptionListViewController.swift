@@ -8,23 +8,27 @@
 
 import UIKit
 
-class FormOptionListViewController: FormViewController {
+public class FormOptionListViewController<T where T: Equatable, T: FormOptionType>: FormViewController {
     
     // MARK: - Properties
     
-    var row = FormOptionList(identifier: "")
+    var row = FormOptionList<T>(identifier: "")
     var selection: (() -> ())?
     
     // MARK: - UIViewController
     
-    override func viewDidLoad() {
+    public override init(style: UITableViewStyle) {
+        super.init(style: style)
+    }
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
         title = row.title
     }
 
     // MARK: - FormViewController
     
-    override func configuredForm() -> Form {
+    public override func configuredForm() -> Form {
         let form = Form()
 
         form.appendSection() {
@@ -33,7 +37,7 @@ class FormOptionListViewController: FormViewController {
             for option in self.row.options {
                 section.appendRow() {
                     let row = FormRow(identifier: self.row.identifier)
-                    row.title = option
+                    row.title = option.stringRepresentation()
                     
                     row.tap = { [unowned self] (cell) in
 
@@ -58,7 +62,10 @@ class FormOptionListViewController: FormViewController {
                     row.configure = { [unowned self] (cell) in
                         switch self.row.selectionType {
                             case .Single:
-                                cell.accessoryType = option == self.row.selection ? .Checkmark : .None
+                                if let selection = self.row.selection {
+                                    cell.accessoryType = option == selection ? .Checkmark : .None
+                                }
+
                                 break
                             case .Multiple:
                                 cell.accessoryType = self.row.selections.contains(option) ? .Checkmark : .None

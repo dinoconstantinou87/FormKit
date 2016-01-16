@@ -9,6 +9,22 @@
 import UIKit
 import FormKit
 
+enum Genre: String {
+    case DrumAndBass = "Drum & Bass"
+    case Hardcore = "Hardcore"
+    case Oldskool = "Oldskool"
+    
+    static func options() -> [ Genre ] {
+        return[ .DrumAndBass, .Hardcore, .Oldskool ]
+    }
+}
+
+extension Genre: FormOptionType {
+    func stringRepresentation() -> String {
+        return self.rawValue
+    }
+}
+
 class EventDetailViewController: FormViewController {
     
     // MARK: - UIViewController
@@ -67,7 +83,7 @@ class EventDetailViewController: FormViewController {
             }
             
             section.appendRow() {
-                let row = FormOptionList(identifier: "repeats")
+                let row = FormOptionList<String>(identifier: "repeats")
                 row.title = "Repeats"
                 row.options = [ "Never", "Every Day", "Every Week" ]
                 row.selection = "Never"
@@ -76,12 +92,12 @@ class EventDetailViewController: FormViewController {
             }
             
             section.appendRow() {
-                let row = FormOptionList(identifier: "genres")
+                let row = FormOptionList<Genre>(identifier: "genres")
                 row.title = "Genres"
                 row.selectionType = .Multiple
-                row.options = [ "Drum & Bass", "Oldskool", "Hardcore" ]
-                row.selections = [ "Drum & Bass" ]
-                
+                row.options = Genre.options()
+                row.selections = [ .DrumAndBass ]
+
                 return row
             }
 
