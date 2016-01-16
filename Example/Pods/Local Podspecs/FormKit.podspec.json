@@ -16,10 +16,32 @@
     "ios": "8.0"
   },
   "requires_arc": true,
-  "source_files": "Pod/Classes/**/*",
   "resource_bundles": {
     "FormKit": [
       "Pod/Assets/*.png"
     ]
-  }
+  },
+  "dependencies": {
+    "PureLayout": [
+      "~> 3.0.1"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Cells",
+      "source_files": "Pod/Source/Cells/**/*"
+    },
+    {
+      "name": "Controllers",
+      "source_files": "Pod/Source/Controllers/**/*"
+    },
+    {
+      "name": "Models",
+      "source_files": "Pod/Source/Models/**/*"
+    },
+    {
+      "name": "Protocols",
+      "source_files": "Pod/Source/Protocols/**/*"
+    }
+  ]
 }

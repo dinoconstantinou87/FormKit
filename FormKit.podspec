@@ -1,21 +1,8 @@
-#
-# Be sure to run `pod lib lint FormKit.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = "FormKit"
   s.version          = "0.1.0"
   s.summary          = "A short description of FormKit."
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
                        DESC
 
@@ -24,17 +11,29 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Dino Constantinou" => "dconstantinou360@gmail.com" }
   s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/FormKit.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
+  s.subspec 'Cells' do |ss|
+    ss.source_files = 'Pod/Source/Cells/**/*'
+  end
+
+  s.subspec 'Controllers' do |ss|
+    ss.source_files = 'Pod/Source/Controllers/**/*'
+  end
+
+  s.subspec 'Models' do |ss|
+    ss.source_files = 'Pod/Source/Models/**/*'
+  end
+
+  s.subspec 'Protocols' do |ss|
+    ss.source_files = 'Pod/Source/Protocols/**/*'
+  end
+
   s.resource_bundles = {
     'FormKit' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'PureLayout', '~> 3.0.1'
 end
