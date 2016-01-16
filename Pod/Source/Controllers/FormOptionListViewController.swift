@@ -36,13 +36,34 @@ class FormOptionListViewController: FormViewController {
                     row.title = option
                     
                     row.tap = { [unowned self] (cell) in
-                        self.row.selection = option
+
+                        switch self.row.selectionType {
+                        case .Single:
+                            self.row.selection = option
+                            break
+                        case .Multiple:
+                            if let index = self.row.selections.indexOf(option) {
+                                self.row.selections.removeAtIndex(index)
+                            } else {
+                                self.row.selections.append(option)
+                            }
+
+                            break
+                        }
+                        
                         self.configureVisibleFormRows()
                         self.selection?()
                     }
                     
                     row.configure = { [unowned self] (cell) in
-                        cell.accessoryType = option == self.row.selection ? .Checkmark : .None
+                        switch self.row.selectionType {
+                            case .Single:
+                                cell.accessoryType = option == self.row.selection ? .Checkmark : .None
+                                break
+                            case .Multiple:
+                                cell.accessoryType = self.row.selections.contains(option) ? .Checkmark : .None
+                                break
+                        }
                     }
 
                     return row

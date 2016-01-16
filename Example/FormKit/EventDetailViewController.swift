@@ -74,6 +74,16 @@ class EventDetailViewController: FormViewController {
                 
                 return row
             }
+            
+            section.appendRow() {
+                let row = FormOptionList(identifier: "genres")
+                row.title = "Genres"
+                row.selectionType = .Multiple
+                row.options = [ "Drum & Bass", "Oldskool", "Hardcore" ]
+                row.selections = [ "Drum & Bass" ]
+                
+                return row
+            }
 
             return section
         }

@@ -10,23 +10,47 @@ import Foundation
 
 public class FormOptionList: FormRowTypeInteractable {
     
+    // MARK: Types
+    
+    public enum SelectionType {
+        case Single
+        case Multiple
+    }
+    
     // MARK: - Properties
     
     public var title: String?
     public var options = [ String ]()
+    
     public var selection: String?
+    public var selections = [ String ]()
+    
+    public var selectionType: SelectionType = .Single
 
     public private(set) var identifier: String
     public var value: Any? {
         get {
-            return selection
+            switch selectionType {
+                case .Single:
+                    return selection
+                case .Multiple:
+                    return selections
+            }
         }
         
         set {
-            selection = value as? String
+            switch selectionType {
+                case .Single:
+                    selection = value as? String
+                case .Multiple:
+                    if let selections = value as? [ String ] {
+                        self.selections = selections
+                    }
+            }
+
         }
     }
-    
+
     // MARK: - Init
 
     public init(identifier: String) {
@@ -46,8 +70,14 @@ public class FormOptionList: FormRowTypeInteractable {
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormOptions") }
         cell.titleLabel.text = title
-        cell.valueLabel.text = selection
         cell.accessoryType = .DisclosureIndicator
+        
+        switch selectionType {
+            case .Single:
+                cell.valueLabel.text = selection
+            case .Multiple:
+                cell.valueLabel.text = selections.joinWithSeparator(", ")
+        }
     }
     
     // MARK: - FormRowTypeInteractable
@@ -57,9 +87,12 @@ public class FormOptionList: FormRowTypeInteractable {
 
         let viewController = FormOptionListViewController(style: .Grouped)
         viewController.row = self
-        viewController.selection = {
+        viewController.selection = { [unowned self] in
             controller.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)
-            controller.navigationController?.popViewControllerAnimated(true)
+
+            if self.selectionType == .Single {
+                controller.navigationController?.popViewControllerAnimated(true)
+            }
         }
 
         navigationController.pushViewController(viewController, animated: true)
