@@ -22,8 +22,18 @@ public class FormViewController: UITableViewController {
         return Form()
     }
     
+    public func configureVisibleFormRows() {
+        guard let indexPaths = tableView.indexPathsForVisibleRows else { return }
+
+        for indexPath in indexPaths {
+            let row = form.rowForIndexPath(indexPath)
+            guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { fatalError("Expected cell to be returned for index path \(indexPaths)") }
+            row.configureTableViewCell(cell)
+        }
+    }
+
     // MARK: - UIViewController
-    
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 

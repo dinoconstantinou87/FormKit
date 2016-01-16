@@ -57,6 +57,11 @@ public class FormOptionList: FormRowTypeInteractable {
 
         let viewController = FormOptionListViewController(style: .Grouped)
         viewController.row = self
+        viewController.selection = {
+            controller.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)
+            controller.navigationController?.popViewControllerAnimated(true)
+        }
+
         navigationController.pushViewController(viewController, animated: true)
     }
 

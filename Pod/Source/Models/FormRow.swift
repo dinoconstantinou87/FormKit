@@ -8,11 +8,13 @@
 
 import Foundation
 
-public class FormRow: FormRowType {
+public class FormRow: FormRowType, FormRowTypeInteractable {
 
     // MARK: - Properties
 
     public var title: String?
+    public var tap: ((cell: UITableViewCell) -> ())?
+    public var configure: ((cell: UITableViewCell) -> ())?
 
     public private(set) var identifier: String
     public var value: Any?
@@ -36,6 +38,12 @@ public class FormRow: FormRowType {
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.titleLabel.text = title
+        configure?(cell: cell)
+    }
+    
+    public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+        controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tap?(cell: cell)
     }
 
 }

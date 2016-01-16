@@ -13,6 +13,7 @@ class FormOptionListViewController: FormViewController {
     // MARK: - Properties
     
     var row = FormOptionList(identifier: "")
+    var selection: (() -> ())?
     
     // MARK: - UIViewController
     
@@ -32,8 +33,17 @@ class FormOptionListViewController: FormViewController {
             for option in self.row.options {
                 section.appendRow() {
                     let row = FormRow(identifier: self.row.identifier)
-                    row.title = String(option)
-                    row.value = option
+                    row.title = option
+                    
+                    row.tap = { [unowned self] (cell) in
+                        self.row.selection = option
+                        self.configureVisibleFormRows()
+                        self.selection?()
+                    }
+                    
+                    row.configure = { [unowned self] (cell) in
+                        cell.accessoryType = option == self.row.selection ? .Checkmark : .None
+                    }
 
                     return row
                 }
@@ -44,13 +54,5 @@ class FormOptionListViewController: FormViewController {
         
         return form
     }
-    
-    // MARK: - UITableViewDelegate
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        super.tableView(tableView, didSelectRowAtIndexPath: indexPath)
 
-        print(form.rowForIndexPath(indexPath).value)
-    }
-    
 }
