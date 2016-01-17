@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormOptionListViewController<T where T: Equatable, T: FormOptionType, T: AnyObject>: FormViewController {
+public class FormOptionListViewController<T where T: Hashable, T: FormOptionType, T: AnyObject>: FormViewController {
     
     // MARK: - Properties
     
@@ -49,7 +49,7 @@ public class FormOptionListViewController<T where T: Equatable, T: FormOptionTyp
                             if let index = self.row.selections.indexOf(option) {
                                 self.row.selections.removeAtIndex(index)
                             } else {
-                                self.row.selections.append(option)
+                                self.row.selections.insert(option)
                             }
 
                             break

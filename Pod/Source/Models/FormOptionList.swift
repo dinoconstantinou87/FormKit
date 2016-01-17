@@ -13,7 +13,7 @@ public enum SelectionType {
     case Multiple
 }
 
-public class FormOptionList<T where T: Equatable, T: FormOptionType, T: AnyObject>: FormRowTypeInteractable {
+public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject>: FormRowTypeInteractable {
 
     // MARK: - Properties
     
@@ -21,7 +21,7 @@ public class FormOptionList<T where T: Equatable, T: FormOptionType, T: AnyObjec
     public var options = [ T ]()
     
     public var selection: T?
-    public var selections = [ T ]()
+    public var selections = Set<T>()
     
     public var selectionType: SelectionType = .Single
 
@@ -41,7 +41,7 @@ public class FormOptionList<T where T: Equatable, T: FormOptionType, T: AnyObjec
                 case .Single:
                     selection = value as? T
                 case .Multiple:
-                    if let selections = value as? [ T ] {
+                    if let selections = value as? Set<T> {
                         self.selections = selections
                     }
             }
