@@ -16,7 +16,7 @@ public class FormSwitch: NSObject, FormRowType {
     public var on: Bool = false
     
     public private(set) var identifier: String
-    public var value: Any? {
+    public var value: AnyObject? {
         get {
             return on
         }

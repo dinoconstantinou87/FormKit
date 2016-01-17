@@ -38,8 +38,8 @@ public class Form {
         return sections.map({ return $0.rows }).flatMap({ return $0 })
     }
     
-    public func values() -> [ String: Any? ] {
-        return rows().reduce([ String: Any? ]()) { (var values, row) in
+    public func values() -> [ String: AnyObject? ] {
+        return rows().reduce([ String: AnyObject? ]()) { (var values, row) in
             values[row.identifier] = row.value
             return values
         }

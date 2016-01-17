@@ -13,7 +13,7 @@ public enum SelectionType {
     case Multiple
 }
 
-public class FormOptionList<T where T: Equatable, T: FormOptionType>: FormRowTypeInteractable {
+public class FormOptionList<T where T: Equatable, T: FormOptionType, T: AnyObject>: FormRowTypeInteractable {
 
     // MARK: - Properties
     
@@ -26,7 +26,7 @@ public class FormOptionList<T where T: Equatable, T: FormOptionType>: FormRowTyp
     public var selectionType: SelectionType = .Single
 
     public private(set) var identifier: String
-    public var value: Any? {
+    public var value: AnyObject? {
         get {
             switch selectionType {
                 case .Single:

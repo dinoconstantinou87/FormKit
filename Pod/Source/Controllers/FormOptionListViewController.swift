@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormOptionListViewController<T where T: Equatable, T: FormOptionType>: FormViewController {
+public class FormOptionListViewController<T where T: Equatable, T: FormOptionType, T: AnyObject>: FormViewController {
     
     // MARK: - Properties
     

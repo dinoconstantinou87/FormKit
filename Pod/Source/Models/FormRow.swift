@@ -17,7 +17,7 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
     public var configure: ((cell: UITableViewCell) -> ())?
 
     public private(set) var identifier: String
-    public var value: Any?
+    public var value: AnyObject?
 
     // MARK: - Init
 

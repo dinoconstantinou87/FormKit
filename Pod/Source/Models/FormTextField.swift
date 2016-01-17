@@ -17,7 +17,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     public var configure: ((cell: FormTextFieldCell) -> ())?
 
     public private(set) var identifier: String
-    public var value: Any? {
+    public var value: AnyObject? {
         get {
             return text
         }
