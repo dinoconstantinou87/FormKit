@@ -14,6 +14,9 @@ public class FormSection {
 
     public private(set) var rows = [ FormRowType ]()
 
+    public var header: String?
+    public var footer: String?
+
     // MARK: - Init
     
     public init() { /* Default Initialiser Swift Access Control Quirk */ }

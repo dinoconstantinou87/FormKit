@@ -11,13 +11,6 @@ import PureLayout
 
 public class FormRowCell: UITableViewCell {
 
-    public lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        return titleLabel
-    }()
-    
     public lazy var valueLabel: UILabel = {
         let valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -31,15 +24,14 @@ public class FormRowCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        contentView.addSubview(titleLabel)
+
         contentView.addSubview(valueLabel)
-        
-        titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Trailing)
-        
-        valueLabel.autoPinEdgeToSuperviewMargin(.Trailing)
-        valueLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        valueLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: titleLabel)
+
+        NSLayoutConstraint.autoSetPriority(UILayoutPriorityDefaultHigh) {
+            self.valueLabel.autoPinEdgeToSuperviewMargin(.Trailing)
+            self.valueLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+            self.valueLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: self.textLabel!)
+        }
     }
 
     required public init?(coder aDecoder: NSCoder) {

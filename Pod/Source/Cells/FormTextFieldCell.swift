@@ -32,5 +32,23 @@ public class FormTextFieldCell: UITableViewCell {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: UIResponder
+    
+    public override func canBecomeFirstResponder() -> Bool {
+        return textField.canBecomeFirstResponder()
+    }
+    
+    public override func becomeFirstResponder() -> Bool {
+        return textField.becomeFirstResponder()
+    }
+    
+    public override func canResignFirstResponder() -> Bool {
+        return textField.canResignFirstResponder()
+    }
+    
+    public override func resignFirstResponder() -> Bool {
+        return textField.resignFirstResponder()
+    }
 
 }

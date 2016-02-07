@@ -15,6 +15,8 @@ public class FormViewController: UITableViewController {
     public lazy private(set) var form: Form = {
         return self.configuredForm()
     }()
+    
+    private var hasAutomaticallyBecomeFirstResponder = false
 
     // MARK: - Public Methods
     
@@ -40,6 +42,27 @@ public class FormViewController: UITableViewController {
         form.registerTableViewCellsForTableView(tableView)
     }
     
+    public override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        automaticallyBecomeFirstResponder()
+    }
+    
+    public override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func automaticallyBecomeFirstResponder() {
+        if hasAutomaticallyBecomeFirstResponder == false {
+            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.becomeFirstResponder()
+        }
+
+        hasAutomaticallyBecomeFirstResponder = true
+    }
+
     // MARK: - UITableViewDataSource
     
     public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -73,6 +96,14 @@ public class FormViewController: UITableViewController {
         guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { fatalError("Expected table view cell to be returned for index path \(indexPath)") }
         
         row.controller(self, didSelectCell: cell, forIndexPath: indexPath)
+    }
+    
+    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return form.sections[section].header
+    }
+    
+    public override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return form.sections[section].footer
     }
 
 }

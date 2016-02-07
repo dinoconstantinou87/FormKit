@@ -14,7 +14,7 @@ public enum SelectionType {
 }
 
 public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject>: FormRowTypeInteractable {
-
+    
     // MARK: - Properties
     
     public var title: String?
@@ -67,14 +67,16 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
 
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormOptions") }
-        cell.titleLabel.text = title
+        cell.textLabel?.text = title
         cell.accessoryType = .DisclosureIndicator
         
         switch selectionType {
             case .Single:
-                cell.valueLabel.text = selection?.stringRepresentation()
+                cell.valueLabel.text = selection?.stringRepresentation() ?? NSLocalizedString("None", comment: "None")
             case .Multiple:
-                cell.valueLabel.text = selections.map({ $0.stringRepresentation() }).joinWithSeparator(", ")
+                cell.valueLabel.text = selections.count != 0 ?
+                    selections.map({ $0.stringRepresentation() }).joinWithSeparator(", ") :
+                    NSLocalizedString("None", comment: "None")
         }
     }
     
