@@ -14,8 +14,8 @@ public class FormSection {
 
     public private(set) var rows = [ FormRowType ]()
 
-    public var header: String?
-    public var footer: String?
+    public var header: FormSectionHeaderFooterType?
+    public var footer: FormSectionHeaderFooterType?
 
     // MARK: - Init
     
@@ -27,6 +27,11 @@ public class FormSection {
         for row in rows {
             row.registerTableViewCellForTableView(tableView)
         }
+    }
+    
+    public func registerHeaderFooterViewsForTableView(tableView: UITableView) {
+        header?.registerTableViewHeaderFooterViewForTableView(tableView)
+        footer?.registerTableViewHeaderFooterViewForTableView(tableView)
     }
     
     public func appendRow(row: () -> (FormRowType)) {

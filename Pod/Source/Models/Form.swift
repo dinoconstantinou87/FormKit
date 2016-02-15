@@ -26,6 +26,12 @@ public class Form {
         }
     }
     
+    public func registerHeaderFooterViewsForTableView(tableView: UITableView) {
+        for section in sections {
+            section.registerHeaderFooterViewsForTableView(tableView)
+        }
+    }
+    
     public func appendSection(section: () -> (FormSection)) {
         sections.append(section())
     }
