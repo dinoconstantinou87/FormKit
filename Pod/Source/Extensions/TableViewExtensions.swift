@@ -1,9 +1,9 @@
 //
 //  TableViewExtensions.swift
-//  thortful-iOS
+//  Pods
 //
 //  Created by James Milton on 09/02/2016.
-//  Copyright © 2016 Thortful. All rights reserved.
+//
 //
 
 import UIKit
