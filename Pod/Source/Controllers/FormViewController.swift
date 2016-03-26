@@ -39,6 +39,7 @@ public class FormViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.estimatedRowHeight = 44.0
         form.registerTableViewCellsForTableView(tableView)
     }
     
