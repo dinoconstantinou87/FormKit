@@ -41,6 +41,7 @@ public class FormViewController: UITableViewController {
 
         tableView.estimatedRowHeight = 44.0
         form.registerTableViewCellsForTableView(tableView)
+        form.registerHeaderFooterViewsForTableView(tableView)
     }
     
     public override func viewDidAppear(animated: Bool) {
@@ -99,12 +100,22 @@ public class FormViewController: UITableViewController {
         row.controller(self, didSelectCell: cell, forIndexPath: indexPath)
     }
     
-    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return form.sections[section].header
+    public override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header: FormSectionHeaderFooterType = form.sections[section].header else {return nil}
+        
+        let headerView = header.dequeueReusableTableViewHeaderFooterViewForTableView(tableView)
+        header.configureTableViewHeaderFooterView(headerView)
+        
+        return headerView
     }
     
-    public override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return form.sections[section].footer
+    public override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let footer: FormSectionHeaderFooterType = form.sections[section].footer else {return nil}
+        
+        let footerView = footer.dequeueReusableTableViewHeaderFooterViewForTableView(tableView)
+        footer.configureTableViewHeaderFooterView(footerView)
+        
+        return footerView
     }
 
 }

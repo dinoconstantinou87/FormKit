@@ -39,6 +39,10 @@
 		487D21BD3223561714B6083DF11C182B /* FormKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7434C6CBFF605CCC147A2B863E97EB0C /* FormKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49B45FE2A8CEE526947C865277570752 /* SuiteHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF2E8D6D5A348BF442ECC037B48C531 /* SuiteHooks.swift */; };
 		4E87C6AE24AB15700A39FC24A2F1C93B /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = C435DE6A30F4297C82C8BA2B612138BC /* BeLessThanOrEqual.swift */; };
+		4F1AB2F81C71E349009C2DFF /* FormSectionHeaderFooterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AB2F71C71E349009C2DFF /* FormSectionHeaderFooterType.swift */; };
+		4F1AB2FA1C71E357009C2DFF /* FormSectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AB2F91C71E357009C2DFF /* FormSectionHeaderFooter.swift */; };
+		4F1AB3001C71E384009C2DFF /* FormHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AB2FF1C71E384009C2DFF /* FormHeaderFooterView.swift */; };
+		4F1AB3061C71E3A4009C2DFF /* TableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AB3051C71E3A4009C2DFF /* TableViewExtensions.swift */; };
 		50E96DC887BC68CD0C053BE8244CC6E0 /* NSArray+PureLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 09AD55BA2ABC5B276A91339B5E04E089 /* NSArray+PureLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		512DFAE728521F02AF225F0082195DCC /* Nimble.h in Headers */ = {isa = PBXBuildFile; fileRef = E30257F1D427BAA4019B5C285E2BA67F /* Nimble.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B0263F90696E7FD87CB146D5C5E2C1 /* UIImage+Diff.h in Headers */ = {isa = PBXBuildFile; fileRef = EFD497C34420A7B7B7E49210201DBDFE /* UIImage+Diff.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -297,6 +301,10 @@
 		4DAA7DD6F5650FF3F3FEBF7A285CCC04 /* Quick.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Quick.xcconfig; sourceTree = "<group>"; };
 		4DE453CDEBB7A50966BD1D36385F03D3 /* NSString+QCKSelectorName.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+QCKSelectorName.m"; path = "Quick/NSString+QCKSelectorName.m"; sourceTree = "<group>"; };
 		4E2D3005116110D336F7CDE30DDA528D /* FormKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F1AB2F71C71E349009C2DFF /* FormSectionHeaderFooterType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionHeaderFooterType.swift; sourceTree = "<group>"; };
+		4F1AB2F91C71E357009C2DFF /* FormSectionHeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionHeaderFooter.swift; sourceTree = "<group>"; };
+		4F1AB2FF1C71E384009C2DFF /* FormHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormHeaderFooterView.swift; path = "Pod/Source/Header Footer Views/FormHeaderFooterView.swift"; sourceTree = "<group>"; };
+		4F1AB3051C71E3A4009C2DFF /* TableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewExtensions.swift; path = Pod/Source/Extensions/TableViewExtensions.swift; sourceTree = "<group>"; };
 		517CAC08695378F027F89D518E48991E /* Nimble_Snapshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nimble_Snapshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		567697BC53F6E2C43BF4986A413D94A2 /* MatcherProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatcherProtocols.swift; path = Nimble/Matchers/MatcherProtocols.swift; sourceTree = "<group>"; };
 		576DEC5152D22698BBB669596E4BCDFF /* FormKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FormKit.xcconfig; sourceTree = "<group>"; };
@@ -579,6 +587,8 @@
 		19AA999DD47B40745CDC196F317F8005 /* FormKit */ = {
 			isa = PBXGroup;
 			children = (
+				4F1AB3011C71E38D009C2DFF /* Extensions */,
+				4F1AB2FB1C71E366009C2DFF /* Header Footer Views */,
 				B24BB076CAF06CA9452872A16684C781 /* Cells */,
 				0E64EB3C53F83A907D5B848EDDAA7D47 /* Controllers */,
 				BD63A14205B3D07A32B704269A62A7BC /* Models */,
@@ -683,6 +693,70 @@
 			path = FBSnapshotTestCase;
 			sourceTree = "<group>";
 		};
+		4F1AB2FB1C71E366009C2DFF /* Header Footer Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB2FC1C71E370009C2DFF /* Pod */,
+			);
+			name = "Header Footer Views";
+			sourceTree = "<group>";
+		};
+		4F1AB2FC1C71E370009C2DFF /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB2FD1C71E374009C2DFF /* Source */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		4F1AB2FD1C71E374009C2DFF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB2FE1C71E37B009C2DFF /* Header Footer Views */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		4F1AB2FE1C71E37B009C2DFF /* Header Footer Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB2FF1C71E384009C2DFF /* FormHeaderFooterView.swift */,
+			);
+			name = "Header Footer Views";
+			sourceTree = "<group>";
+		};
+		4F1AB3011C71E38D009C2DFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB3021C71E395009C2DFF /* Pod */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		4F1AB3021C71E395009C2DFF /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB3031C71E399009C2DFF /* Source */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		4F1AB3031C71E399009C2DFF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB3041C71E39D009C2DFF /* Extensions */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		4F1AB3041C71E39D009C2DFF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AB3051C71E3A4009C2DFF /* TableViewExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		5BE9A4EDFA45CCD34743BC0B510B01CC /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -706,6 +780,7 @@
 				8FADAC507E6640A2FAD6B7ED85DD1889 /* FormRowType.swift */,
 				C98250901C4A6ABD00A0C2FB /* FormRowTypeInteractable.swift */,
 				C9B4251E1C4AE6F000FADBF8 /* FormOptionType.swift */,
+				4F1AB2F71C71E349009C2DFF /* FormSectionHeaderFooterType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -909,6 +984,7 @@
 				FC633A36C31DDC0A7A9289C3CC13D1DA /* FormTextField.swift */,
 				C982508A1C4A615C00A0C2FB /* FormSwitch.swift */,
 				C982508C1C4A64E000A0C2FB /* FormOptionList.swift */,
+				4F1AB2F91C71E357009C2DFF /* FormSectionHeaderFooter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1450,12 +1526,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1AB3061C71E3A4009C2DFF /* TableViewExtensions.swift in Sources */,
 				C982508D1C4A64E000A0C2FB /* FormOptionList.swift in Sources */,
 				AB0D41358C2CB60428B7765E3884BD2F /* Form.swift in Sources */,
 				C982508B1C4A615C00A0C2FB /* FormSwitch.swift in Sources */,
 				C9DD2AA81C4A5883009A92BF /* FormTextFieldCell.swift in Sources */,
+				4F1AB3001C71E384009C2DFF /* FormHeaderFooterView.swift in Sources */,
 				C2DFE59F5544BC82D26A0D139D8A25B8 /* FormKit-dummy.m in Sources */,
 				C9B425201C4AE72B00FADBF8 /* FormOptionType.swift in Sources */,
+				4F1AB2FA1C71E357009C2DFF /* FormSectionHeaderFooter.swift in Sources */,
 				344F824551D5BF47352CB277157E1052 /* FormRow.swift in Sources */,
 				C982508F1C4A668200A0C2FB /* FormOptionListViewController.swift in Sources */,
 				57DA4D99D29FCD14D15580E9F59AE7F3 /* FormRowCell.swift in Sources */,
@@ -1463,6 +1542,7 @@
 				609AC3C430E4B313A68DE528850FDCF0 /* FormSection.swift in Sources */,
 				8110E8DE669278A38793121F401D0717 /* FormTextField.swift in Sources */,
 				5C88D7ED61EBBB47D5129A5377493744 /* FormViewController.swift in Sources */,
+				4F1AB2F81C71E349009C2DFF /* FormSectionHeaderFooterType.swift in Sources */,
 				C98250911C4A6ABD00A0C2FB /* FormRowTypeInteractable.swift in Sources */,
 				C98250891C4A60A200A0C2FB /* FormSwitchCell.swift in Sources */,
 			);
