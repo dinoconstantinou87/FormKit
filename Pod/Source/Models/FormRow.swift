@@ -15,8 +15,8 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
     public var title: String?
     public var icon: UIImage?
     
-    public var tap: ((cell: UITableViewCell) -> ())?
-    public var configure: ((cell: UITableViewCell) -> ())?
+    public var tap: ((cell: FormRowCell) -> ())?
+    public var configure: ((cell: FormRowCell) -> ())?
 
     public private(set) var identifier: String
     public var value: AnyObject?
@@ -45,8 +45,10 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
         configure?(cell: cell)
     }
     
-    public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+        guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
         tap?(cell: cell)
     }
 

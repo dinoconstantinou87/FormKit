@@ -30,7 +30,6 @@ public class FormRowCell: UITableViewCell {
         NSLayoutConstraint.autoSetPriority(UILayoutPriorityDefaultHigh) {
             self.valueLabel.autoPinEdgeToSuperviewMargin(.Trailing)
             self.valueLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-            self.valueLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: self.textLabel!)
         }
     }
 
