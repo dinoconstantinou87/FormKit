@@ -7,23 +7,23 @@
 //
 
 import UIKit
+import Observable
 
 public class FormViewController: UITableViewController {
     
     // MARK: - Properties
     
-    public lazy private(set) var form: Form = {
-        return self.configuredForm()
-    }()
+    public var form: Form = Form() {
+        didSet {
+            form.registerTableViewCellsForTableView(tableView)
+            tableView.reloadData()
+        }
+    }
     
     private var hasAutomaticallyBecomeFirstResponder = false
 
     // MARK: - Public Methods
-    
-    public func configuredForm() -> Form {
-        return Form()
-    }
-    
+
     public func configureVisibleFormRows() {
         guard let indexPaths = tableView.indexPathsForVisibleRows else { return }
 
@@ -40,7 +40,6 @@ public class FormViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.estimatedRowHeight = 44.0
-        form.registerTableViewCellsForTableView(tableView)
     }
     
     public override func viewDidAppear(animated: Bool) {
@@ -71,7 +70,7 @@ public class FormViewController: UITableViewController {
     }
     
     public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return form.sections[section].rows.count
+        return form.sections[section].visibleRows().count
     }
     
     public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

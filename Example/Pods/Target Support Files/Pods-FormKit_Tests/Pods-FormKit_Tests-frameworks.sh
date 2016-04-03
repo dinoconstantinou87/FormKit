@@ -86,16 +86,8 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-FormKit_Tests/FormKit.framework"
   install_framework "Pods-FormKit_Tests/PureLayout.framework"
-  install_framework "Pods-FormKit_Tests/FBSnapshotTestCase.framework"
-  install_framework "Pods-FormKit_Tests/Nimble.framework"
-  install_framework "Pods-FormKit_Tests/Nimble_Snapshots.framework"
-  install_framework "Pods-FormKit_Tests/Quick.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-FormKit_Tests/FormKit.framework"
   install_framework "Pods-FormKit_Tests/PureLayout.framework"
-  install_framework "Pods-FormKit_Tests/FBSnapshotTestCase.framework"
-  install_framework "Pods-FormKit_Tests/Nimble.framework"
-  install_framework "Pods-FormKit_Tests/Nimble_Snapshots.framework"
-  install_framework "Pods-FormKit_Tests/Quick.framework"
 fi

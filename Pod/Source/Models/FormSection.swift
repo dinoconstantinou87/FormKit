@@ -33,4 +33,8 @@ public class FormSection {
         rows.append(row())
     }
     
+    public func visibleRows() -> [ FormRowType ] {
+        return rows.filter({ $0.hidden == false })
+    }
+    
 }

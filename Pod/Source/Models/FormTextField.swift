@@ -17,6 +17,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     public var configure: ((cell: FormTextFieldCell) -> ())?
 
     public private(set) var identifier: String
+    public var hidden: Bool = false
     public var value: AnyObject? {
         get {
             return text
@@ -54,7 +55,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
         cell.textField.placeholder = title
         cell.textField.text = text
         cell.textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        cell.textField.addTarget(self, action: "textChanged:", forControlEvents: .EditingChanged)
+        cell.textField.addTarget(self, action: #selector(self.textChanged(_:)), forControlEvents: .EditingChanged)
         
         configure?(cell: cell)
     }

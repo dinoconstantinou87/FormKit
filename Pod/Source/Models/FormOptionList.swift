@@ -26,6 +26,7 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
     public var selectionType: SelectionType = .Single
 
     public private(set) var identifier: String
+    public var hidden: Bool = false
     public var value: AnyObject? {
         get {
             switch selectionType {

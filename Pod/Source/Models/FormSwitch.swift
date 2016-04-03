@@ -14,8 +14,10 @@ public class FormSwitch: NSObject, FormRowType {
     
     public var title: String?
     public var on: Bool = false
-    
+    public var valueDidChange: ((Bool) -> ())?
+
     public private(set) var identifier: String
+    public var hidden: Bool = false
     public var value: AnyObject? {
         get {
             return on
@@ -25,7 +27,7 @@ public class FormSwitch: NSObject, FormRowType {
             on = (self.value as? Bool) == true
         }
     }
-    
+
     // MARK: - Init
     
     public init(identifier: String) {
@@ -36,6 +38,7 @@ public class FormSwitch: NSObject, FormRowType {
     
     func valueChanged(control: UISwitch) {
         on = control.on
+        valueDidChange?(on)
     }
 
     // MARK: - FormRowType
@@ -53,7 +56,7 @@ public class FormSwitch: NSObject, FormRowType {
         cell.titleLabel.text = title
         cell.control.on = on
         cell.control.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        cell.control.addTarget(self, action: "valueChanged:", forControlEvents: .ValueChanged)
+        cell.control.addTarget(self, action: #selector(self.valueChanged(_:)), forControlEvents: .ValueChanged)
     }
     
 }

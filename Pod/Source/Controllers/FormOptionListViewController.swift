@@ -24,11 +24,13 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
     public override func viewDidLoad() {
         super.viewDidLoad()
         title = row.title
+        
+        configurForm()
     }
 
     // MARK: - FormViewController
     
-    public override func configuredForm() -> Form {
+    private func configurForm() {
         let form = Form()
 
         form.appendSection() {
@@ -80,7 +82,7 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
             return section
         }
         
-        return form
+        self.form = form
     }
 
 }

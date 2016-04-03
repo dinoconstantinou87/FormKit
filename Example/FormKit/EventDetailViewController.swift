@@ -9,22 +9,6 @@
 import UIKit
 import FormKit
 
-enum Genre: String {
-    case DrumAndBass = "Drum & Bass"
-    case Hardcore = "Hardcore"
-    case Oldskool = "Oldskool"
-    
-    static func options() -> [ Genre ] {
-        return[ .DrumAndBass, .Hardcore, .Oldskool ]
-    }
-}
-
-extension Genre: FormOptionType {
-    func stringRepresentation() -> String {
-        return self.rawValue
-    }
-}
-
 class EventDetailViewController: FormViewController {
     
     // MARK: - UIViewController
@@ -35,7 +19,9 @@ class EventDetailViewController: FormViewController {
         title = NSLocalizedString("New Event", comment: "New Event")
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .Done, target: self, action: "add")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .Done, target: self, action: #selector(self.add))
+        
+        configureForm()
     }
     
     // MARK: - Internal Methods
@@ -44,9 +30,9 @@ class EventDetailViewController: FormViewController {
         print( "Saving values... \(form.values())" )
     }
 
-    // MARK: - FormViewController
+    // MARK: - Private Methods
 
-    override func configuredForm() -> Form {
+    private func configureForm() {
         let form = Form()
         
         form.appendSection() {
@@ -78,34 +64,28 @@ class EventDetailViewController: FormViewController {
                 let row = FormSwitch(identifier: "all_day")
                 row.title = "All Day"
                 row.on = true
-                
-                return row
-            }
-            
-            section.appendRow() {
-                let row = FormOptionList<String>(identifier: "repeats")
-                row.title = "Repeats"
-                row.options = [ "Never", "Every Day", "Every Week" ]
-                row.selection = "Never"
-                
-                return row
-            }
-            
-            section.appendRow() {
-                let row = FormOptionList<Genre>(identifier: "genres")
-                row.title = "Genres"
-                row.selectionType = .Multiple
-                row.options = Genre.options()
-                row.selections = [ .DrumAndBass ]
+                row.valueDidChange = { (on: Bool) in
+                    self.startRow.hidden = !on
+                }
 
                 return row
             }
+
+            section.appendRow() { return self.startRow }
 
             return section
         }
         
-        return form
+        self.form = form
     }
+    
+    lazy private var startRow: FormRow = {
+        let row = FormRow(identifier: "start")
+        row.title = "Start"
+        row.hidden = true
+        
+        return row
+    }()
     
 }
 

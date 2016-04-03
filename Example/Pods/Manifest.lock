@@ -1,0 +1,29 @@
+PODS:
+  - FormKit (0.1.0):
+    - FormKit/Cells (= 0.1.0)
+    - FormKit/Controllers (= 0.1.0)
+    - FormKit/Models (= 0.1.0)
+    - FormKit/Protocols (= 0.1.0)
+    - PureLayout (~> 3.0.1)
+  - FormKit/Cells (0.1.0):
+    - PureLayout (~> 3.0.1)
+  - FormKit/Controllers (0.1.0):
+    - PureLayout (~> 3.0.1)
+  - FormKit/Models (0.1.0):
+    - PureLayout (~> 3.0.1)
+  - FormKit/Protocols (0.1.0):
+    - PureLayout (~> 3.0.1)
+  - PureLayout (3.0.1)
+
+DEPENDENCIES:
+  - FormKit (from `../`)
+
+EXTERNAL SOURCES:
+  FormKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FormKit: 49bd86948cd672fa63e32106a0cd45cf1054817f
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+
+COCOAPODS: 0.39.0

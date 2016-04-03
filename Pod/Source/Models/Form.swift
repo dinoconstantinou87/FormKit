@@ -31,15 +31,20 @@ public class Form {
     }
 
     public func rowForIndexPath(indexPath: NSIndexPath) -> FormRowType {
-        return sections[indexPath.section].rows[indexPath.row]
+        return sections[indexPath.section].visibleRows()[indexPath.row]
     }
 
     public func rows() -> [ FormRowType ] {
         return sections.map({ return $0.rows }).flatMap({ return $0 })
     }
     
+    public func visibleRows() -> [ FormRowType ] {
+        return sections.map({ return $0.visibleRows() }).flatMap({ return $0 })
+    }
+    
     public func values() -> [ String: AnyObject? ] {
-        return rows().reduce([ String: AnyObject? ]()) { (var values, row) in
+        return rows().reduce([ String: AnyObject? ]()) { (values, row) in
+            var values = values
             values[row.identifier] = row.value
             return values
         }

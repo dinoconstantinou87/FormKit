@@ -19,6 +19,7 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
     public var configure: ((cell: FormRowCell) -> ())?
 
     public private(set) var identifier: String
+    public var hidden: Bool = false
     public var value: AnyObject?
 
     // MARK: - Init
