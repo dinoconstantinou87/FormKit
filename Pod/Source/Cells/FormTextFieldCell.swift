@@ -33,6 +33,13 @@ public class FormTextFieldCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UITableViewCell
+    
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+    }
+    
     // MARK: UIResponder
     
     public override func canBecomeFirstResponder() -> Bool {

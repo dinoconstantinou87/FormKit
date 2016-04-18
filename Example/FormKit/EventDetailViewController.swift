@@ -88,6 +88,10 @@ class EventDetailViewController: FormViewController {
             section.appendFormRow({
                 let row = FormDateTime(formatter: self.formatter)
                 row.title = "Start"
+                row.date = self.event.start
+                row.valueDidChange = { [unowned self] (date) in
+                    self.event.start = date
+                }
 
                 return row
             }())
@@ -95,6 +99,10 @@ class EventDetailViewController: FormViewController {
             section.appendFormRow({
                 let row = FormDateTime(formatter: self.formatter)
                 row.title = "End"
+                row.date = self.event.end
+                row.valueDidChange = { [unowned self] (date) in
+                    self.event.end = date
+                }
 
                 return row
             }())

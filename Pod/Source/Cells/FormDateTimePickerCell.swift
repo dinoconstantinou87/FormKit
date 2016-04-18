@@ -31,5 +31,13 @@ public class FormDateTimePickerCell: UITableViewCell {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    // MARK: - UITableViewCell
+    
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        pickerView.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+    }
 
 }

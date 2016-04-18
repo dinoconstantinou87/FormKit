@@ -46,4 +46,12 @@ public class FormSwitchCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - UITableViewCell
+    
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        control.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+    }
+
 }

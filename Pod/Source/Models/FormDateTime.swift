@@ -14,10 +14,15 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     
     public var title: String?
     
-    public var date = NSDate()
+    public var date: NSDate?
+    public var formattedDate: String? {
+        guard let date = date else { return nil }
+        return formatter.stringFromDate(date)
+    }
+
     public var formatter: NSDateFormatter
     public var valueDidChange: ((NSDate) -> ())?
-    
+
     public weak var section: FormSection?
     
     private var expanded: Bool {
@@ -56,7 +61,7 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
         section.removeFormRow(picker)
         section.reloadFormRow(self)
     }
-
+    
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
@@ -70,8 +75,8 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.textLabel?.text = title
-        cell.valueLabel.text = formatter.stringFromDate(date)
-        
+        cell.valueLabel.text = formattedDate
+
         cell.didBecomeFirstResponder = { [unowned self] in
             self.becomeFirstResponder()
         }
