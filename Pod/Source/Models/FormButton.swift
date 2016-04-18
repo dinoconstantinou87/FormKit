@@ -15,6 +15,8 @@ public class FormButton: FormRowType, FormRowTypeInteractable {
     public var title: String?
     public var tap: ((cell: UITableViewCell) -> ())?
     
+    public weak var section: FormSection?
+    
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {

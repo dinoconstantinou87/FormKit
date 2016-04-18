@@ -24,6 +24,8 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
     public var selections = Set<T>()
     
     public var selectionType: SelectionType = .Single
+    
+    public weak var section: FormSection?
 
 //    public var value: AnyObject? {
 //        get {

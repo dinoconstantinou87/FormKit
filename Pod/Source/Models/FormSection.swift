@@ -44,27 +44,41 @@ public class FormSection {
         insertFormRow(row, atIndex: rows.endIndex)
     }
     
-    public func insertFormRow(row: FormRowType, atIndex index: Int) {
+    public func insertFormRow(row: FormRowType, atIndex index: Int, withAnimation animation: UITableViewRowAnimation = .Automatic) {
+        row.section = self
         rows.insert(row, atIndex: index)
         
         guard let tableView = tableView else { return }
         row.registerTableViewCellForTableView(tableView)
         
-        if let section = form?.indexForSection(self) {
-            let indexPath = NSIndexPath(forRow: index, inSection: section)
-            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        }
+        guard let indexPath = indexPathForRow(row) else { return }
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: animation)
     }
     
-    public func removeFormRow(row: FormRowType) {
+    public func removeFormRow(row: FormRowType, withAnimation animation: UITableViewRowAnimation = .Automatic) {
         guard let index = indexForFormRow(row) else { return }
+        let indexPath = indexPathForRow(row)
         rows.removeAtIndex(index)
         
         guard let tableView = tableView else { return }
-        if let section = form?.indexForSection(self) {
-            let indexPath = NSIndexPath(forRow: index, inSection: section)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        if let indexPath = indexPath {
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation)
         }
+    }
+
+    public func reloadFormRow(row: FormRowType) {
+        guard let tableView = tableView else { return }
+        guard let indexPath = indexPathForRow(row) else { return }
+        guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { return }
+
+        row.configureTableViewCell(cell)
+    }
+    
+    public func indexPathForRow(rowType: FormRowType) -> NSIndexPath? {
+        guard let row = indexForFormRow(rowType) else { return nil }
+        guard let section = form?.indexForSection(self) else { return nil }
+        
+        return NSIndexPath(forRow: row, inSection: section)
     }
 
     public func indexForFormRow(row: FormRowType) -> Int? {

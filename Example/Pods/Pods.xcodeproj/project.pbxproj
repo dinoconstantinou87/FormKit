@@ -400,10 +400,10 @@
 			isa = PBXGroup;
 			children = (
 				CD7832813D7D8FE93108A3B6F0649FEB /* FormButtonCell.swift */,
-				FD72297F2D3839A33ED10CE32EAE987B /* FormRowCell.swift */,
 				656AE0DB0663DEFA99035479D0C22C31 /* FormSwitchCell.swift */,
 				1FE26A928105DF7403FA5CA23B9F3186 /* FormTextFieldCell.swift */,
 				C95ACEBE1CC50A7000764EF1 /* FormDateTimePickerCell.swift */,
+				FD72297F2D3839A33ED10CE32EAE987B /* FormRowCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

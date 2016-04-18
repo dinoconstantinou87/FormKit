@@ -15,6 +15,8 @@ public class FormSwitch: NSObject, FormRowType {
     public var title: String?
     public var on: Bool = false
     public var valueDidChange: ((Bool) -> ())?
+    
+    public weak var section: FormSection?
 
     // MARK: - Internal Methods
     

@@ -17,6 +17,8 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
     
     public var tap: ((cell: FormRowCell) -> ())?
     public var configureCell: ((cell: FormRowCell) -> ())?
+    
+    public weak var section: FormSection?
 
     // MARK: - Init
 

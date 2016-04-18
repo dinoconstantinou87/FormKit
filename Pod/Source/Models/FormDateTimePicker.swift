@@ -14,6 +14,8 @@ public class FormDateTimePicker: NSObject, FormRowType {
     
     public var date = NSDate()
     public var valueDidChange: ((NSDate) -> ())?
+    
+    public weak var section: FormSection?
 
     // MARK: - Internal Methods
     

@@ -17,6 +17,8 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     public var configureCell: ((cell: FormTextFieldCell) -> ())?
     public var valueDidChange: ((String?) -> ())?
     
+    public weak var section: FormSection?
+    
     // MARK: - Internal Methods
     
     func valueDidChangeForTextField(textField: UITextField) {
