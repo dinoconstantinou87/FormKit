@@ -44,7 +44,7 @@ public class FormSection {
         insertFormRow(row, atIndex: rows.endIndex)
     }
     
-    public func insertFormRow(row: FormRowType, atIndex index: Int, withAnimation animation: UITableViewRowAnimation = .Automatic) {
+    public func insertFormRow(row: FormRowType, atIndex index: Int, withAnimation animation: UITableViewRowAnimation = .Fade) {
         row.section = self
         rows.insert(row, atIndex: index)
         
@@ -55,7 +55,7 @@ public class FormSection {
         tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: animation)
     }
     
-    public func removeFormRow(row: FormRowType, withAnimation animation: UITableViewRowAnimation = .Automatic) {
+    public func removeFormRow(row: FormRowType, withAnimation animation: UITableViewRowAnimation = .Fade) {
         guard let index = indexForFormRow(row) else { return }
         let indexPath = indexPathForRow(row)
         rows.removeAtIndex(index)

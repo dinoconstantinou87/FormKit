@@ -33,11 +33,28 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
 
         return picker
     }()
-
+    
     // MARK: - Init
     
     public init(formatter: NSDateFormatter) {
         self.formatter = formatter
+    }
+    
+    // MARK: - Private Methods
+
+    private func becomeFirstResponder() {
+        guard let section = section else { return }
+        guard let indexPath = section.indexPathForRow(self) else { return }
+        
+        section.insertFormRow(picker, atIndex: indexPath.row.successor())
+        section.reloadFormRow(self)
+    }
+    
+    private func resignFirstResponder() {
+        guard let section = section else { return }
+
+        section.removeFormRow(picker)
+        section.reloadFormRow(self)
     }
 
     // MARK: - FormRowType
@@ -54,27 +71,20 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.textLabel?.text = title
         cell.valueLabel.text = formatter.stringFromDate(date)
-
-        if expanded {
-            cell.valueLabel.textColor = cell.tintColor
-        } else {
-            cell.valueLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        
+        cell.didBecomeFirstResponder = { [unowned self] in
+            self.becomeFirstResponder()
+        }
+        
+        cell.didResignFirstResponder = { [unowned self] in
+            self.resignFirstResponder()
         }
     }
 
     public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        guard let section = section else { return }
-        if expanded {
-            section.removeFormRow(picker)
-            section.reloadFormRow(self)
-        } else {
-            
-            section.insertFormRow(picker, atIndex: indexPath.row.successor())
-            section.reloadFormRow(self)
-        }
+        cell.becomeFirstResponder()
     }
-    
+
 }

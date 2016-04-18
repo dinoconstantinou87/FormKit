@@ -11,6 +11,9 @@ import PureLayout
 
 public class FormRowCell: UITableViewCell {
 
+    var didBecomeFirstResponder: (() -> ())?
+    var didResignFirstResponder: (() -> ())?
+ 
     lazy public private(set) var valueLabel: UILabel = {
         let valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +38,30 @@ public class FormRowCell: UITableViewCell {
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - UIResponder
+    
+    public override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+
+    public override func canResignFirstResponder() -> Bool {
+        return true
+    }
+    
+    public override func becomeFirstResponder() -> Bool {
+        valueLabel.textColor = tintColor
+        didBecomeFirstResponder?()
+        
+        return super.becomeFirstResponder()
+    }
+
+    public override func resignFirstResponder() -> Bool {
+        valueLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        didResignFirstResponder?()
+        
+        return super.resignFirstResponder()
     }
     
 }

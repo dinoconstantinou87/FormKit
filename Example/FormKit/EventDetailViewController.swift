@@ -91,6 +91,13 @@ class EventDetailViewController: FormViewController {
 
                 return row
             }())
+            
+            section.appendFormRow({
+                let row = FormDateTime(formatter: self.formatter)
+                row.title = "End"
+
+                return row
+            }())
 
             return section
         }())
@@ -99,11 +106,12 @@ class EventDetailViewController: FormViewController {
     }
 
     var event = Event()
+
     lazy var formatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
         formatter.timeStyle = .MediumStyle
-        
+
         return formatter
     }()
 
