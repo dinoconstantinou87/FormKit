@@ -25,37 +25,29 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
     
     public var selectionType: SelectionType = .Single
 
-    public private(set) var identifier: String
-    public var hidden: Bool = false
-    public var value: AnyObject? {
-        get {
-            switch selectionType {
-                case .Single:
-                    return selection
-                case .Multiple:
-                    return selections
-            }
-        }
-        
-        set {
-            switch selectionType {
-                case .Single:
-                    selection = value as? T
-                case .Multiple:
-                    if let selections = value as? Set<T> {
-                        self.selections = selections
-                    }
-            }
+//    public var value: AnyObject? {
+//        get {
+//            switch selectionType {
+//                case .Single:
+//                    return selection
+//                case .Multiple:
+//                    return selections
+//            }
+//        }
+//        
+//        set {
+//            switch selectionType {
+//                case .Single:
+//                    selection = value as? T
+//                case .Multiple:
+//                    if let selections = value as? Set<T> {
+//                        self.selections = selections
+//                    }
+//            }
+//
+//        }
+//    }
 
-        }
-    }
-
-    // MARK: - Init
-
-    public init(identifier: String) {
-        self.identifier = identifier
-    }
-    
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {

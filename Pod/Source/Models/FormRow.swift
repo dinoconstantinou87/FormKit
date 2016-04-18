@@ -16,17 +16,11 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
     public var icon: UIImage?
     
     public var tap: ((cell: FormRowCell) -> ())?
-    public var configure: ((cell: FormRowCell) -> ())?
-
-    public private(set) var identifier: String
-    public var hidden: Bool = false
-    public var value: AnyObject?
+    public var configureCell: ((cell: FormRowCell) -> ())?
 
     // MARK: - Init
 
-    public init(identifier: String) {
-        self.identifier = identifier
-    }
+    public init() {}
 
     // MARK: - FormRowType
 
@@ -43,7 +37,7 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
         cell.imageView?.image = icon
         cell.textLabel?.text = title
 
-        configure?(cell: cell)
+        configureCell?(cell: cell)
     }
     
     public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {

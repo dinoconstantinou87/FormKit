@@ -9,8 +9,16 @@
 import UIKit
 import FormKit
 
+struct Event {
+    var title: String?
+    var location: String?
+    var day: Bool = false
+    var start: NSDate?
+    var end: NSDate?
+}
+
 class EventDetailViewController: FormViewController {
-    
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -19,9 +27,15 @@ class EventDetailViewController: FormViewController {
         title = NSLocalizedString("New Event", comment: "New Event")
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .Done, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .Done, target: self, action: #selector(self.save))
         
         configureForm()
+    }
+    
+    // MARK: - Internal Methods
+    
+    func save() {
+        print(event)
     }
 
     // MARK: - Private Methods
@@ -30,20 +44,27 @@ class EventDetailViewController: FormViewController {
         let form = Form()
         
         form.appendFormSection({
-            
             let section = FormSection()
-            
+
             section.appendFormRow({
-                let row = FormTextField(identifier: "title")
+                let row = FormTextField()
                 row.title = "Title"
+                row.text = event.title
+                row.valueDidChange = { [unowned self] (text) in
+                    self.event.title = text
+                }
 
                 return row
             }())
             
             section.appendFormRow({
-                let row = FormTextField(identifier: "location")
+                let row = FormTextField()
                 row.title = "Location"
-                
+                row.text = event.location
+                row.valueDidChange = { [unowned self] (text) in
+                    self.event.location = text
+                }
+
                 return row
             }())
 
@@ -51,25 +72,23 @@ class EventDetailViewController: FormViewController {
         }())
         
         form.appendFormSection({
-            
             let section = FormSection()
             
             section.appendFormRow({
-                let row = FormSwitch(identifier: "all_day")
+                let row = FormSwitch()
                 row.title = "All Day"
-                row.on = true
-                row.valueDidChange = { (on: Bool) in
-
+                row.on = event.day
+                row.valueDidChange = { [unowned self] (on) in
+                    self.event.day = on
                 }
 
                 return row
             }())
 
             section.appendFormRow({
-                let row = FormRow(identifier: "start")
+                let row = FormRow()
                 row.title = "Start"
-                row.hidden = true
-                
+
                 return row
             }())
 
@@ -79,5 +98,7 @@ class EventDetailViewController: FormViewController {
         self.form = form
     }
     
+    var event = Event()
+
 }
 

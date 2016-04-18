@@ -14,16 +14,6 @@ public class FormButton: FormRowType, FormRowTypeInteractable {
     
     public var title: String?
     public var tap: ((cell: UITableViewCell) -> ())?
-
-    public private(set) var identifier: String
-    public var hidden: Bool = false
-    public var value: AnyObject?
-    
-    // MARK: - Init
-    
-    public init(identifier: String) {
-        self.identifier = identifier
-    }
     
     // MARK: - FormRowType
     

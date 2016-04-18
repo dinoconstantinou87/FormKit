@@ -19,7 +19,7 @@ public class FormSection {
 
     // MARK: - Init
     
-    public init() { /* Default Initialiser Swift Access Control Quirk */ }
+    public init() {}
 
     // MARK: - Public Methods
     

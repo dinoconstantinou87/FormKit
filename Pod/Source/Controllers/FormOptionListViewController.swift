@@ -12,7 +12,7 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
     
     // MARK: - Properties
     
-    var row = FormOptionList<T>(identifier: "")
+    var row = FormOptionList<T>()
     var selection: (() -> ())?
     
     // MARK: - UIViewController
@@ -38,7 +38,7 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
 
             for option in self.row.options {
                 section.appendFormRow({
-                    let row = FormRow(identifier: self.row.identifier)
+                    let row = FormRow()
                     row.title = option.stringRepresentation()
                     
                     row.tap = { [unowned self] (cell) in

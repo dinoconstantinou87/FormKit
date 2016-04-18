@@ -14,30 +14,14 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     
     public var title: String?
     public var text: String?
-    public var configure: ((cell: FormTextFieldCell) -> ())?
-
-    public private(set) var identifier: String
-    public var hidden: Bool = false
-    public var value: AnyObject? {
-        get {
-            return text
-        }
-        
-        set {
-            text = value as? String
-        }
-    }
-    
-    // MARK: - Init
-    
-    public init(identifier: String) {
-        self.identifier = identifier
-    }
+    public var configureCell: ((cell: FormTextFieldCell) -> ())?
+    public var valueDidChange: ((String?) -> ())?
     
     // MARK: - Internal Methods
     
     func textChanged(textField: UITextField) {
         text = textField.text
+        valueDidChange?(text)
     }
 
     // MARK: - FormRowType
@@ -57,7 +41,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
         cell.textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         cell.textField.addTarget(self, action: #selector(self.textChanged(_:)), forControlEvents: .EditingChanged)
         
-        configure?(cell: cell)
+        configureCell?(cell: cell)
     }
     
     // MARK: - FormRowTypeInteractable

@@ -6,7 +6,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 public class FormSwitch: NSObject, FormRowType {
     
@@ -16,24 +16,16 @@ public class FormSwitch: NSObject, FormRowType {
     public var on: Bool = false
     public var valueDidChange: ((Bool) -> ())?
 
-    public private(set) var identifier: String
-    public var hidden: Bool = false
-    public var value: AnyObject? {
-        get {
-            return on
-        }
-        
-        set {
-            on = (self.value as? Bool) == true
-        }
-    }
+//    public var value: AnyObject? {
+//        get {
+//            return on
+//        }
+//        
+//        set {
+//            on = (self.value as? Bool) == true
+//        }
+//    }
 
-    // MARK: - Init
-    
-    public init(identifier: String) {
-        self.identifier = identifier
-    }
-    
     // MARK: - Internal Methods
     
     func valueChanged(control: UISwitch) {
