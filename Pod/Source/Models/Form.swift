@@ -26,8 +26,8 @@ public class Form {
         }
     }
     
-    public func appendSection(section: () -> (FormSection)) {
-        sections.append(section())
+    public func appendFormSection(section: FormSection) {
+        sections.append(section)
     }
 
     public func rowForIndexPath(indexPath: NSIndexPath) -> FormRowType {
@@ -39,15 +39,7 @@ public class Form {
     }
     
     public func visibleRows() -> [ FormRowType ] {
-        return sections.map({ return $0.visibleRows() }).flatMap({ return $0 })
-    }
-    
-    public func values() -> [ String: AnyObject? ] {
-        return rows().reduce([ String: AnyObject? ]()) { (values, row) in
-            var values = values
-            values[row.identifier] = row.value
-            return values
-        }
+        return rows() //sections.map({ return $0.visibleRows() }).flatMap({ return $0 })
     }
 
 }

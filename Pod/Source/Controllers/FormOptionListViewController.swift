@@ -33,16 +33,16 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
     private func configurForm() {
         let form = Form()
 
-        form.appendSection() {
+        form.appendFormSection({
             let section = FormSection()
 
             for option in self.row.options {
-                section.appendRow() {
+                section.appendFormRow({
                     let row = FormRow(identifier: self.row.identifier)
                     row.title = option.stringRepresentation()
                     
                     row.tap = { [unowned self] (cell) in
-
+                        
                         switch self.row.selectionType {
                         case .Single:
                             self.row.selection = option
@@ -53,7 +53,7 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
                             } else {
                                 self.row.selections.insert(option)
                             }
-
+                            
                             break
                         }
                         
@@ -63,24 +63,25 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
                     
                     row.configure = { [unowned self] (cell) in
                         switch self.row.selectionType {
-                            case .Single:
-                                if let selection = self.row.selection {
-                                    cell.accessoryType = option == selection ? .Checkmark : .None
-                                }
-
-                                break
-                            case .Multiple:
-                                cell.accessoryType = self.row.selections.contains(option) ? .Checkmark : .None
-                                break
+                        case .Single:
+                            if let selection = self.row.selection {
+                                cell.accessoryType = option == selection ? .Checkmark : .None
+                            }
+                            
+                            break
+                        case .Multiple:
+                            cell.accessoryType = self.row.selections.contains(option) ? .Checkmark : .None
+                            break
                         }
                     }
-
+                    
                     return row
-                }
+                    
+                }())
             }
 
             return section
-        }
+        }())
         
         self.form = form
     }

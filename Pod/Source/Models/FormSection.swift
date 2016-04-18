@@ -29,12 +29,12 @@ public class FormSection {
         }
     }
     
-    public func appendRow(row: () -> (FormRowType)) {
-        rows.append(row())
+    public func appendFormRow(row: FormRowType) {
+        rows.append(row)
     }
-    
+
     public func visibleRows() -> [ FormRowType ] {
-        return rows.filter({ $0.hidden == false })
+        return rows //.filter({ $0.hidden == false })
     }
     
 }
