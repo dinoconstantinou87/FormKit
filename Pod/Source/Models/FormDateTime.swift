@@ -84,7 +84,12 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        cell.becomeFirstResponder()
+        
+        if cell.isFirstResponder() {
+            cell.resignFirstResponder()
+        } else {
+            cell.becomeFirstResponder()
+        }
     }
 
 }
