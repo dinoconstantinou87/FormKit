@@ -19,7 +19,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     
     // MARK: - Internal Methods
     
-    func textChanged(textField: UITextField) {
+    func valueDidChangeForTextField(textField: UITextField) {
         text = textField.text
         valueDidChange?(text)
     }
@@ -27,11 +27,11 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormTextFieldCell.self, forCellReuseIdentifier: NSStringFromClass(FormTextFieldCell.self))
+        tableView.registerClass(FormTextFieldCell.self, forCellReuseIdentifier: String(FormTextFieldCell.self))
     }
     
     public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(FormTextFieldCell.self), forIndexPath: indexPath)
+        return tableView.dequeueReusableCellWithIdentifier(String(FormTextFieldCell.self), forIndexPath: indexPath)
     }
     
     public func configureTableViewCell(abstract: UITableViewCell) {
@@ -39,7 +39,7 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
         cell.textField.placeholder = title
         cell.textField.text = text
         cell.textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        cell.textField.addTarget(self, action: #selector(self.textChanged(_:)), forControlEvents: .EditingChanged)
+        cell.textField.addTarget(self, action: #selector(self.valueDidChangeForTextField(_:)), forControlEvents: .EditingChanged)
         
         configureCell?(cell: cell)
     }

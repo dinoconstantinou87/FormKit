@@ -16,16 +16,6 @@ public class FormSwitch: NSObject, FormRowType {
     public var on: Bool = false
     public var valueDidChange: ((Bool) -> ())?
 
-//    public var value: AnyObject? {
-//        get {
-//            return on
-//        }
-//        
-//        set {
-//            on = (self.value as? Bool) == true
-//        }
-//    }
-
     // MARK: - Internal Methods
     
     func valueChanged(control: UISwitch) {
@@ -36,18 +26,17 @@ public class FormSwitch: NSObject, FormRowType {
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormSwitchCell.self, forCellReuseIdentifier: NSStringFromClass(FormSwitchCell.self))
+        tableView.registerClass(FormSwitchCell.self, forCellReuseIdentifier: String(FormSwitchCell.self))
     }
     
     public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(FormSwitchCell.self), forIndexPath: indexPath)
+        return tableView.dequeueReusableCellWithIdentifier(String(FormSwitchCell.self), forIndexPath: indexPath)
     }
     
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormSwitchCell else { fatalError("Encountered unexpected cell type for FormSwitch") }
         cell.titleLabel.text = title
         cell.control.on = on
-        cell.control.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         cell.control.addTarget(self, action: #selector(self.valueChanged(_:)), forControlEvents: .ValueChanged)
     }
     

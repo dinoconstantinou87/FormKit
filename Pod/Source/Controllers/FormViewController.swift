@@ -12,32 +12,18 @@ public class FormViewController: UITableViewController {
     
     // MARK: - Properties
     
-    public var form: Form = Form() {
+    public var form = Form() {
         didSet {
-            form.registerTableViewCellsForTableView(tableView)
-            tableView.reloadData()
+            form.tableView = tableView
         }
     }
-    
+
     private var hasAutomaticallyBecomeFirstResponder = false
-
-    // MARK: - Public Methods
-
-    public func configureVisibleFormRows() {
-        guard let indexPaths = tableView.indexPathsForVisibleRows else { return }
-
-        for indexPath in indexPaths {
-            let row = form.rowForIndexPath(indexPath)
-            guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { fatalError("Expected cell to be returned for index path \(indexPaths)") }
-            row.configureTableViewCell(cell)
-        }
-    }
 
     // MARK: - UIViewController
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.estimatedRowHeight = 44.0
     }
     
@@ -69,7 +55,7 @@ public class FormViewController: UITableViewController {
     }
     
     public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return form.sections[section].visibleRows().count
+        return form.sections[section].rows.count
     }
     
     public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

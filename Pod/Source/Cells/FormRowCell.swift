@@ -11,7 +11,7 @@ import PureLayout
 
 public class FormRowCell: UITableViewCell {
 
-    public lazy var valueLabel: UILabel = {
+    lazy public private(set) var valueLabel: UILabel = {
         let valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.textAlignment = .Right

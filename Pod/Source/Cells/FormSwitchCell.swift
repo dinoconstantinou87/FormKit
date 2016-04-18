@@ -11,14 +11,14 @@ import PureLayout
 
 public class FormSwitchCell: UITableViewCell {
     
-    public lazy var titleLabel: UILabel = {
+    lazy public private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return titleLabel
     }()
 
-    public lazy var control: UISwitch = {
+    lazy public private(set) var control: UISwitch = {
         let control = UISwitch()
         control.translatesAutoresizingMaskIntoConstraints = false
         

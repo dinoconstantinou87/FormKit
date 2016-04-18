@@ -57,11 +57,10 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
                             break
                         }
                         
-                        self.configureVisibleFormRows()
                         self.selection?()
                     }
                     
-                    row.configure = { [unowned self] (cell) in
+                    row.configureCell = { [unowned self] (cell) in
                         switch self.row.selectionType {
                         case .Single:
                             if let selection = self.row.selection {

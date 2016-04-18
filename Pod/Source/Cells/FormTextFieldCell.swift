@@ -11,7 +11,7 @@ import PureLayout
 
 public class FormTextFieldCell: UITableViewCell {
     
-    public lazy var textField: UITextField = {
+    lazy public private(set) var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         

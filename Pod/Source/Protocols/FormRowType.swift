@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol FormRowType {
+public protocol FormRowType: class {
     func registerTableViewCellForTableView(tableView: UITableView)
     func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell
     func configureTableViewCell(cell: UITableViewCell)

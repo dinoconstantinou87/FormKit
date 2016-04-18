@@ -18,11 +18,11 @@ public class FormButton: FormRowType, FormRowTypeInteractable {
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormButtonCell.self, forCellReuseIdentifier: NSStringFromClass(FormButtonCell.self))
+        tableView.registerClass(FormButtonCell.self, forCellReuseIdentifier: String(FormButtonCell.self))
     }
     
     public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(FormButtonCell.self), forIndexPath: indexPath)
+        return tableView.dequeueReusableCellWithIdentifier(String(FormButtonCell.self), forIndexPath: indexPath)
     }
     
     public func configureTableViewCell(abstract: UITableViewCell) {

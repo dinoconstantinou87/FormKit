@@ -86,7 +86,7 @@ class EventDetailViewController: FormViewController {
             }())
 
             section.appendFormRow({
-                let row = FormRow()
+                let row = FormDateTime()
                 row.title = "Start"
 
                 return row
@@ -97,7 +97,7 @@ class EventDetailViewController: FormViewController {
         
         self.form = form
     }
-    
+
     var event = Event()
 
 }

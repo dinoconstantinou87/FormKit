@@ -51,11 +51,11 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormRowCell.self, forCellReuseIdentifier: NSStringFromClass(FormRowCell.self))
+        tableView.registerClass(FormRowCell.self, forCellReuseIdentifier: String(FormRowCell.self))
     }
     
     public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(FormRowCell.self), forIndexPath: indexPath)
+        return tableView.dequeueReusableCellWithIdentifier(String(FormRowCell.self), forIndexPath: indexPath)
     }
 
     public func configureTableViewCell(abstract: UITableViewCell) {
