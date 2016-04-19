@@ -54,6 +54,8 @@ public class FormOptionListViewController<T where T: Hashable>: FormViewControll
                                 self.row.selections.insert(option)
                             }
                             
+                            section.reloadFormRow(row)
+                            
                             break
                         }
                         
