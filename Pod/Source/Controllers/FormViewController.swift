@@ -18,13 +18,16 @@ public class FormViewController: UITableViewController {
         }
     }
 
+    public var automaticallyBecomesFirstReponder = false
     private var hasAutomaticallyBecomeFirstResponder = false
 
     // MARK: - UIViewController
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.estimatedRowHeight = 44.0
+        tableView.keyboardDismissMode = .OnDrag
     }
     
     public override func viewDidAppear(animated: Bool) {
@@ -33,19 +36,18 @@ public class FormViewController: UITableViewController {
         automaticallyBecomeFirstResponder()
     }
     
-    public override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
+    public override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         view.endEditing(true)
     }
     
     // MARK: - Private Methods
     
     private func automaticallyBecomeFirstResponder() {
-        if hasAutomaticallyBecomeFirstResponder == false {
+        if automaticallyBecomesFirstReponder && hasAutomaticallyBecomeFirstResponder == false {
             tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.becomeFirstResponder()
+            hasAutomaticallyBecomeFirstResponder = true
         }
-
-        hasAutomaticallyBecomeFirstResponder = true
     }
 
     // MARK: - UITableViewDataSource

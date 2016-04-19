@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelegate {
+public class FormTextField: NSObject, FormRowTypeInteractable {
  
     // MARK: - Properties
     
@@ -38,9 +38,9 @@ public class FormTextField: NSObject, FormRowTypeInteractable, UITextFieldDelega
     
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormTextFieldCell else { fatalError("Encountered unexpected cell type for FormTextField") }
+        cell.textField.clearButtonMode = .WhileEditing
         cell.textField.placeholder = title
         cell.textField.text = text
-        cell.textField.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
         cell.textField.addTarget(self, action: #selector(self.valueDidChangeForTextField(_:)), forControlEvents: .EditingChanged)
         
         configureCell?(cell: cell)

@@ -29,6 +29,8 @@ struct Event {
     var start = NSDate()
     var end = NSDate()
     var repeats: Repeat = .Never
+    var URL: NSURL?
+    var notes: String?
 }
 
 class EventDetailViewController: FormViewController {
@@ -75,6 +77,14 @@ class EventDetailViewController: FormViewController {
             return section
         }())
         
+        form.appendFormSection({
+            let section = FormSection()
+            section.appendFormRow(self.URL)
+            section.appendFormRow(self.notes)
+            
+            return section
+        }())
+        
         self.form = form
     }
     
@@ -102,6 +112,7 @@ class EventDetailViewController: FormViewController {
         let row = FormTextField()
         row.title = "Title"
         row.text = self.event.title
+
         row.valueDidChange = { [unowned self] (text) in
             self.event.title = text
         }
@@ -164,6 +175,40 @@ class EventDetailViewController: FormViewController {
         return row
     }()
     
+    lazy private var URL: FormTextField = {
+        let row = FormTextField()
+        row.title = "URL"
+        row.text = self.event.URL?.absoluteString
+        
+        row.configureCell = { (cell) in
+            cell.textField.keyboardType = .URL
+            cell.textField.autocapitalizationType = .None
+            cell.textField.autocorrectionType = .No
+        }
+        
+        row.valueDidChange = { [unowned self] (text) in
+            guard let text = text else {
+                self.event.URL = nil
+                return
+            }
+            
+            self.event.URL = NSURL(string: text)
+        }
+        
+        return row
+    }()
+    
+    lazy private var notes: FormTextView = {
+        let row = FormTextView()
+        row.title = "Notes"
+        row.text = self.event.notes
+        row.valueDidChange = { (text) in
+            self.event.notes = text
+        }
+        
+        return row
+    }()
+
     lazy var dateTimeFormatter: NSDateFormatter = {
         let dateTimeFormatter = NSDateFormatter()
         dateTimeFormatter.dateStyle = .MediumStyle

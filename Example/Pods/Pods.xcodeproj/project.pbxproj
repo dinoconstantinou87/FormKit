@@ -41,6 +41,8 @@
 		C95ACEBF1CC50A7000764EF1 /* FormDateTimePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95ACEBE1CC50A7000764EF1 /* FormDateTimePickerCell.swift */; };
 		C95ACEC11CC50AB800764EF1 /* FormDateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95ACEC01CC50AB800764EF1 /* FormDateTimePicker.swift */; };
 		C95ACEC31CC50FE800764EF1 /* FormDateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95ACEC21CC50FE800764EF1 /* FormDateTime.swift */; };
+		C9FA0F771CC681FC0046CBE4 /* FormTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FA0F761CC681FC0046CBE4 /* FormTextViewCell.swift */; };
+		C9FA0F791CC6827E0046CBE4 /* FormTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FA0F781CC6827E0046CBE4 /* FormTextView.swift */; };
 		CA53692B2FC8CDCD646F45E38D339FC5 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D0D48D26F82F7721BC1C5405C803342 /* PureLayout.framework */; };
 		DA5BC3AD1BED159587B6EC73A5ADB664 /* FormOptionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6B356BA4DCB92B570F1306C1239FCA /* FormOptionList.swift */; };
 		DA919423DE3D96646C291EAA2A249EC5 /* PureLayout-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 808D9E17BE044F47037C6ABD6F65EE32 /* PureLayout-dummy.m */; };
@@ -149,6 +151,8 @@
 		C95ACEC01CC50AB800764EF1 /* FormDateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDateTimePicker.swift; sourceTree = "<group>"; };
 		C95ACEC21CC50FE800764EF1 /* FormDateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDateTime.swift; sourceTree = "<group>"; };
 		C97CA0DB5A7BC1590BD41CBD63FFF4BB /* Pods-FormKit_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-FormKit_Tests.modulemap"; sourceTree = "<group>"; };
+		C9FA0F761CC681FC0046CBE4 /* FormTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextViewCell.swift; sourceTree = "<group>"; };
+		C9FA0F781CC6827E0046CBE4 /* FormTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextView.swift; sourceTree = "<group>"; };
 		CD7832813D7D8FE93108A3B6F0649FEB /* FormButtonCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FormButtonCell.swift; sourceTree = "<group>"; };
 		D2221A6896530D3E7A8E4AE14B191B08 /* Pods-FormKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-FormKit_Example.modulemap"; sourceTree = "<group>"; };
 		D513550591C40FEC78172EB4B2DA83E5 /* Pods-FormKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FormKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 				66A1A6CD8ADC60A14DCC711B3355AC9E /* FormSection.swift */,
 				F57F5257CEA1539ACBBEC4F95DF56C7F /* FormSwitch.swift */,
 				A8B3BCA5667443CAC168B057D2CDFF38 /* FormTextField.swift */,
+				C9FA0F781CC6827E0046CBE4 /* FormTextView.swift */,
 				C95ACEC21CC50FE800764EF1 /* FormDateTime.swift */,
 				C95ACEC01CC50AB800764EF1 /* FormDateTimePicker.swift */,
 			);
@@ -399,6 +404,7 @@
 				FD72297F2D3839A33ED10CE32EAE987B /* FormRowCell.swift */,
 				CD7832813D7D8FE93108A3B6F0649FEB /* FormButtonCell.swift */,
 				1FE26A928105DF7403FA5CA23B9F3186 /* FormTextFieldCell.swift */,
+				C9FA0F761CC681FC0046CBE4 /* FormTextViewCell.swift */,
 				656AE0DB0663DEFA99035479D0C22C31 /* FormSwitchCell.swift */,
 				C95ACEBE1CC50A7000764EF1 /* FormDateTimePickerCell.swift */,
 			);
@@ -725,7 +731,9 @@
 				C95ACEC11CC50AB800764EF1 /* FormDateTimePicker.swift in Sources */,
 				FE9C595368854AFB7CB65639378F0F7A /* FormTextField.swift in Sources */,
 				0B06C280FAF58F215BFBC5BF3D62F81F /* FormTextFieldCell.swift in Sources */,
+				C9FA0F771CC681FC0046CBE4 /* FormTextViewCell.swift in Sources */,
 				C95ACEC31CC50FE800764EF1 /* FormDateTime.swift in Sources */,
+				C9FA0F791CC6827E0046CBE4 /* FormTextView.swift in Sources */,
 				361769814492D9929AF118C8B25AC018 /* FormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

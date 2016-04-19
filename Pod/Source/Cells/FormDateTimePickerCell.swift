@@ -6,10 +6,10 @@
 //
 //
 
-import Foundation
+import UIKit
 
 public class FormDateTimePickerCell: UITableViewCell {
-    
+
     lazy public private(set) var pickerView: UIDatePicker = {
         let pickerView = UIDatePicker()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
