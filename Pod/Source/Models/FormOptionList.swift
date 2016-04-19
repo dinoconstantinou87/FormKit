@@ -13,12 +13,14 @@ public enum SelectionType {
     case Multiple
 }
 
-public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject>: FormRowTypeInteractable {
+public class FormOptionList<T where T: Hashable>: FormRowTypeInteractable {
     
     // MARK: - Properties
     
     public var title: String?
     public var options = [ T ]()
+    
+    public var stringRepresentatonForOption: ((T) -> (String?))?
     
     public var selection: T?
     public var selections = Set<T>()
@@ -27,29 +29,10 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
     
     public weak var section: FormSection?
 
-//    public var value: AnyObject? {
-//        get {
-//            switch selectionType {
-//                case .Single:
-//                    return selection
-//                case .Multiple:
-//                    return selections
-//            }
-//        }
-//        
-//        set {
-//            switch selectionType {
-//                case .Single:
-//                    selection = value as? T
-//                case .Multiple:
-//                    if let selections = value as? Set<T> {
-//                        self.selections = selections
-//                    }
-//            }
-//
-//        }
-//    }
-
+    // MARK: - Init
+    
+    public init() {}
+    
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {
@@ -67,11 +50,14 @@ public class FormOptionList<T where T: Hashable, T: FormOptionType, T: AnyObject
         
         switch selectionType {
             case .Single:
-                cell.valueLabel.text = selection?.stringRepresentation() ?? NSLocalizedString("None", comment: "None")
+                if let selection = selection {
+                    cell.valueLabel.text = stringRepresentatonForOption?(selection)
+                } else {
+                    cell.valueLabel.text = "None"
+                }
             case .Multiple:
                 cell.valueLabel.text = selections.count != 0 ?
-                    selections.map({ $0.stringRepresentation() }).joinWithSeparator(", ") :
-                    NSLocalizedString("None", comment: "None")
+                    selections.map({ self.stringRepresentatonForOption?($0) ?? "" }).joinWithSeparator(", ") : "None"
         }
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormOptionListViewController<T where T: Hashable, T: FormOptionType, T: AnyObject>: FormViewController {
+public class FormOptionListViewController<T where T: Hashable>: FormViewController {
     
     // MARK: - Properties
     
@@ -39,7 +39,7 @@ public class FormOptionListViewController<T where T: Hashable, T: FormOptionType
             for option in self.row.options {
                 section.appendFormRow({
                     let row = FormRow()
-                    row.title = option.stringRepresentation()
+                    row.title = self.row.stringRepresentatonForOption?(option)
                     
                     row.tap = { [unowned self] (cell) in
                         

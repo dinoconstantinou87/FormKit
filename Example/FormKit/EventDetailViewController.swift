@@ -10,11 +10,25 @@ import UIKit
 import FormKit
 
 struct Event {
+    enum Repeat: String {
+        case Never
+        case EveryDay = "Every Day"
+        case EveryWeek = "Every Week"
+        case EveryTwoWeeks = "Every Two Weeks"
+        case EveryMonth = "Every Month"
+        case EveryYear = "Every Year"
+        
+        static func all() -> [Repeat] {
+            return [.Never, .EveryDay, .EveryWeek, .EveryTwoWeeks, .EveryMonth, .EveryYear]
+        }
+    }
+
     var title: String?
     var location: String?
     var day: Bool = false
-    var start: NSDate?
-    var end: NSDate?
+    var start = NSDate()
+    var end = NSDate()
+    var repeats: Repeat = .Never
 }
 
 class EventDetailViewController: FormViewController {
@@ -103,6 +117,16 @@ class EventDetailViewController: FormViewController {
                 row.valueDidChange = { [unowned self] (date) in
                     self.event.end = date
                 }
+
+                return row
+            }())
+            
+            section.appendFormRow({
+                let row = FormOptionList<Event.Repeat>()
+                row.title = "Repeat"
+                row.options = Event.Repeat.all()
+                row.selection = event.repeats
+                row.stringRepresentatonForOption = { $0.rawValue }
 
                 return row
             }())

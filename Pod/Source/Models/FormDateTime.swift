@@ -25,10 +25,6 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
 
     public weak var section: FormSection?
     
-    private var expanded: Bool {
-        return section?.containsFormRow(picker) == true
-    }
-
     lazy private var picker: FormDateTimePicker = {
         let picker = FormDateTimePicker()
         picker.valueDidChange = { [unowned self] (date) in
