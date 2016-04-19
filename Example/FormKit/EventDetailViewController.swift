@@ -56,95 +56,127 @@ class EventDetailViewController: FormViewController {
 
     private func configureForm() {
         let form = Form()
-        
+
         form.appendFormSection({
             let section = FormSection()
-
-            section.appendFormRow({
-                let row = FormTextField()
-                row.title = "Title"
-                row.text = event.title
-                row.valueDidChange = { [unowned self] (text) in
-                    self.event.title = text
-                }
-
-                return row
-            }())
-            
-            section.appendFormRow({
-                let row = FormTextField()
-                row.title = "Location"
-                row.text = event.location
-                row.valueDidChange = { [unowned self] (text) in
-                    self.event.location = text
-                }
-
-                return row
-            }())
+            section.appendFormRow(self.eventTitle)
+            section.appendFormRow(self.location)
 
             return section
         }())
         
         form.appendFormSection({
             let section = FormSection()
-            
-            section.appendFormRow({
-                let row = FormSwitch()
-                row.title = "All Day"
-                row.on = event.day
-                row.valueDidChange = { [unowned self] (on) in
-                    self.event.day = on
-                }
-
-                return row
-            }())
-
-            section.appendFormRow({
-                let row = FormDateTime(formatter: self.formatter)
-                row.title = "Start"
-                row.date = self.event.start
-                row.valueDidChange = { [unowned self] (date) in
-                    self.event.start = date
-                }
-
-                return row
-            }())
-            
-            section.appendFormRow({
-                let row = FormDateTime(formatter: self.formatter)
-                row.title = "End"
-                row.date = self.event.end
-                row.valueDidChange = { [unowned self] (date) in
-                    self.event.end = date
-                }
-
-                return row
-            }())
-            
-            section.appendFormRow({
-                let row = FormOptionList<Event.Repeat>()
-                row.title = "Repeat"
-                row.options = Event.Repeat.all()
-                row.selection = event.repeats
-                row.stringRepresentatonForOption = { $0.rawValue }
-
-                return row
-            }())
+            section.appendFormRow(self.day)
+            section.appendFormRow(self.start)
+            section.appendFormRow(self.end)
+            section.appendFormRow(self.repeats)
 
             return section
         }())
         
         self.form = form
     }
+    
+    private func configureDateFormatters() {
+        if event.day {
+            start.formatter = dateFormatter
+            start.mode = .Date
+            
+            end.formatter = dateFormatter
+            end.mode = .Date
+        } else {
+            start.formatter = dateTimeFormatter
+            start.mode = .DateAndTime
+            
+            end.formatter = dateTimeFormatter
+            end.mode = .DateAndTime
+        }
+    }
+    
+    // MARK: - Properties
 
     var event = Event()
 
-    lazy var formatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .MediumStyle
+    lazy private var eventTitle: FormTextField = {
+        let row = FormTextField()
+        row.title = "Title"
+        row.text = self.event.title
+        row.valueDidChange = { [unowned self] (text) in
+            self.event.title = text
+        }
+        
+        return row
+    }()
+    
+    lazy private var location: FormTextField = {
+        let row = FormTextField()
+        row.title = "Location"
+        row.text = self.event.location
+        row.valueDidChange = { [unowned self] (text) in
+            self.event.location = text
+        }
+        
+        return row
+    }()
+    
+    lazy private var day: FormSwitch = {
+        let row = FormSwitch()
+        row.title = "All Day"
+        row.on = self.event.day
+        row.valueDidChange = { [unowned self] (on) in
+            self.event.day = on
+            self.configureDateFormatters()
+        }
 
-        return formatter
+        return row
+    }()
+    
+    lazy private var start: FormDateTime = {
+        let row = FormDateTime(formatter: self.dateTimeFormatter)
+        row.title = "Start"
+        row.date = self.event.start
+        row.valueDidChange = { [unowned self] (date) in
+            self.event.start = date
+        }
+ 
+        return row
+    }()
+    
+    lazy private var end: FormDateTime = {
+        let row = FormDateTime(formatter: self.dateTimeFormatter)
+        row.title = "End"
+        row.date = self.event.end
+        row.valueDidChange = { [unowned self] (date) in
+            self.event.end = date
+        }
+ 
+        return row
+    }()
+    
+    lazy private var repeats: FormOptionList<Event.Repeat> = {
+        let row = FormOptionList<Event.Repeat>()
+        row.title = "Repeat"
+        row.options = Event.Repeat.all()
+        row.selection = self.event.repeats
+        row.stringRepresentatonForOption = { $0.rawValue }
+        
+        return row
+    }()
+    
+    lazy var dateTimeFormatter: NSDateFormatter = {
+        let dateTimeFormatter = NSDateFormatter()
+        dateTimeFormatter.dateStyle = .MediumStyle
+        dateTimeFormatter.timeStyle = .MediumStyle
+        
+        return dateTimeFormatter
+    }()
+ 
+    lazy var dateFormatter: NSDateFormatter = {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+
+        return dateFormatter
     }()
 
 }

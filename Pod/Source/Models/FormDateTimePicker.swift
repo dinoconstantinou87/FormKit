@@ -11,11 +11,23 @@ import Foundation
 public class FormDateTimePicker: NSObject, FormRowType {
 
     // MARK: - Properties
-    
-    public var date = NSDate()
+
     public var valueDidChange: ((NSDate) -> ())?
-    
     public weak var section: FormSection?
+
+    public var date = NSDate() {
+        didSet {
+            guard let section = section else { return }
+            section.reloadFormRow(self)
+        }
+    }
+    
+    public var mode: UIDatePickerMode = .DateAndTime {
+        didSet {
+            guard let section = section else { return }
+            section.reloadFormRow(self)
+        }
+    }
 
     // MARK: - Internal Methods
     
@@ -37,6 +49,7 @@ public class FormDateTimePicker: NSObject, FormRowType {
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormDateTimePickerCell else { fatalError("Encountered unexpected cell type for FormDateTimePickerCell") }
         cell.pickerView.date = date
+        cell.pickerView.datePickerMode = mode
         cell.pickerView.addTarget(self, action: #selector(self.valueDidChangeForDatePicker(_:)), forControlEvents: .ValueChanged)
     }
 
