@@ -13,7 +13,14 @@ public class FormRowCell: UITableViewCell {
 
     var didBecomeFirstResponder: (() -> ())?
     var didResignFirstResponder: (() -> ())?
- 
+    
+    lazy public private(set) var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        return titleLabel
+    }()
+
     lazy public private(set) var valueLabel: UILabel = {
         let valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -28,12 +35,13 @@ public class FormRowCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        contentView.addSubview(titleLabel)
         contentView.addSubview(valueLabel)
 
-        NSLayoutConstraint.autoSetPriority(UILayoutPriorityDefaultHigh) {
-            self.valueLabel.autoPinEdgeToSuperviewMargin(.Trailing)
-            self.valueLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        }
+        titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Trailing)
+        
+        valueLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Leading)
+        valueLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: titleLabel, withOffset: 0.0)
     }
 
     required public init?(coder aDecoder: NSCoder) {

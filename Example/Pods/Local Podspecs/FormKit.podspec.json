@@ -3,19 +3,20 @@
   "version": "0.1.0",
   "summary": "A short description of FormKit.",
   "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/FormKit",
+  "homepage": "https://github.com/dconstantinou/FormKit",
   "license": "MIT",
   "authors": {
     "Dino Constantinou": "dconstantinou360@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/FormKit.git",
+    "git": "https://github.com/dconstantinou/FormKit.git",
     "tag": "0.1.0"
   },
   "platforms": {
     "ios": "8.0"
   },
   "requires_arc": true,
+  "source_files": "Pod/Source/**/*",
   "resource_bundles": {
     "FormKit": [
       "Pod/Assets/*.png"
@@ -25,23 +26,5 @@
     "PureLayout": [
       "~> 3.0.1"
     ]
-  },
-  "subspecs": [
-    {
-      "name": "Cells",
-      "source_files": "Pod/Source/Cells/**/*"
-    },
-    {
-      "name": "Controllers",
-      "source_files": "Pod/Source/Controllers/**/*"
-    },
-    {
-      "name": "Models",
-      "source_files": "Pod/Source/Models/**/*"
-    },
-    {
-      "name": "Protocols",
-      "source_files": "Pod/Source/Protocols/**/*"
-    }
-  ]
+  }
 }

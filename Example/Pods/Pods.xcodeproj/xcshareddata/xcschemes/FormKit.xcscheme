@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9BD3F0791FBA883AEFD643A5'
+               BlueprintIdentifier = '3FF5F4A4A68AF2AF6D17347D'
                BlueprintName = 'FormKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'FormKit.framework'>

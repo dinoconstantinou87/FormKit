@@ -45,7 +45,7 @@ public class FormOptionList<T where T: Hashable>: FormRowTypeInteractable {
 
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormOptions") }
-        cell.textLabel?.text = title
+        cell.titleLabel.text = title
         cell.accessoryType = .DisclosureIndicator
         
         switch selectionType {

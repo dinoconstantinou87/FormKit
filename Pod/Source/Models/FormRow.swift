@@ -37,7 +37,7 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.imageView?.image = icon
-        cell.textLabel?.text = title
+        cell.titleLabel.text = title
 
         configureCell?(cell: cell)
     }

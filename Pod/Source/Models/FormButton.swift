@@ -29,7 +29,7 @@ public class FormButton: FormRowType, FormRowTypeInteractable {
     
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormButtonCell else { fatalError("Encountered unexpected cell type for FormRow") }
-        cell.textLabel?.text = title
+        cell.titleLabel.text = title
     }
     
     public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {

@@ -81,7 +81,7 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     
     public func configureTableViewCell(abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
-        cell.textLabel?.text = title
+        cell.titleLabel.text = title
         cell.valueLabel.text = stringForDate()
 
         cell.didBecomeFirstResponder = { [unowned self] in
