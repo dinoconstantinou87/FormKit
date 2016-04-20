@@ -26,6 +26,8 @@ public class FormViewController: UITableViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.estimatedSectionHeaderHeight = 44.0
+        tableView.estimatedSectionFooterHeight = 44.0
         tableView.estimatedRowHeight = 44.0
         tableView.keyboardDismissMode = .OnDrag
     }
@@ -84,13 +86,21 @@ public class FormViewController: UITableViewController {
         
         row.controller(self, didSelectCell: cell, forIndexPath: indexPath)
     }
-    
-    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return form.sections[section].header
-    }
-    
-    public override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return form.sections[section].footer
+
+    public override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = form.sections[section].header else { return nil }
+        let view = header.dequeueReusableTableHeaderFooterForTableView(tableView, section: section)
+        header.configureTableHeaderFooterView(view)
+        
+        return view
     }
 
+    public override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let footer = form.sections[section].footer else { return nil }
+        let view = footer.dequeueReusableTableHeaderFooterForTableView(tableView, section: section)
+        footer.configureTableHeaderFooterView(view)
+        
+        return view
+    }
+   
 }

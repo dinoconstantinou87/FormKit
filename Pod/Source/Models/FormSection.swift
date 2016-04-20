@@ -15,14 +15,26 @@ public class FormSection {
     weak var form: Form?
     weak var tableView: UITableView? {
         didSet {
+            registerTableHeaderFooterViewsTableView()
             registerTableViewCellsForTableView()
         }
     }
     
     public private(set) var rows = [ FormRowType ]()
 
-    public var header: String?
-    public var footer: String?
+    public var header: FormHeaderFooterType? {
+        didSet {
+            guard let tableView = tableView else { return }
+            header?.registerTableHeaderFooterViewForTableView(tableView)
+        }
+    }
+
+    public var footer: FormHeaderFooterType? {
+        didSet {
+            guard let tableView = tableView else { return }
+            footer?.registerTableHeaderFooterViewForTableView(tableView)
+        }
+    }
 
     // MARK: - Init
     
@@ -30,6 +42,13 @@ public class FormSection {
 
     // MARK: - Private Methods
 
+    private func registerTableHeaderFooterViewsTableView() {
+        guard let tableView = tableView else { return }
+
+        header?.registerTableHeaderFooterViewForTableView(tableView)
+        footer?.registerTableHeaderFooterViewForTableView(tableView)
+    }
+ 
     private func registerTableViewCellsForTableView() {
         guard let tableView = tableView else { return }
  
