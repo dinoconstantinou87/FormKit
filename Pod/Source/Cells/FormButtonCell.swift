@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormButtonCell: UITableViewCell {
+public class FormButtonCell: UITableViewCell {
     
     lazy public private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -26,11 +26,11 @@ class FormButtonCell: UITableViewCell {
         titleLabel.autoPinEdgesToSuperviewMargins()
     }
  
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func tintColorDidChange() {
+    override public func tintColorDidChange() {
         super.tintColorDidChange()
         titleLabel.textColor = tintColor
     }
