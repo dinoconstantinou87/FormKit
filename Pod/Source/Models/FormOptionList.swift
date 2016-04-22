@@ -64,7 +64,7 @@ public class FormOptionList<T where T: Hashable>: FormRowTypeInteractable {
     // MARK: - FormRowTypeInteractable
     
     public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
-        guard let navigationController = controller.navigationController else { fatalError("You must contain a form view controller within a navigation controller when using a form options row.") }
+        guard let navigationController = controller.navigationController else { fatalError("You must contain a form view controller within a navigation controller when using a FormOptionList.") }
 
         let viewController = FormOptionListViewController<T>(style: .Grouped)
         viewController.row = self

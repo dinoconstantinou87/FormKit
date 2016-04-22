@@ -42,16 +42,7 @@ class EventDetailViewController: FormViewController {
 
         title = NSLocalizedString("New Event", comment: "New Event")
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .Done, target: self, action: #selector(self.save))
-        
         configureForm()
-    }
-    
-    // MARK: - Internal Methods
-    
-    func save() {
-        print(event)
     }
 
     // MARK: - Private Methods

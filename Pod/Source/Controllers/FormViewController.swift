@@ -21,6 +21,12 @@ public class FormViewController: UITableViewController {
     public var automaticallyBecomesFirstReponder = false
     private var hasAutomaticallyBecomeFirstResponder = false
 
+    // MARK: - Init
+    
+    convenience init() {
+        self.init(style: .Grouped)
+    }
+    
     // MARK: - UIViewController
 
     public override func viewDidLoad() {

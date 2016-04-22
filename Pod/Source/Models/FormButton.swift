@@ -17,6 +17,10 @@ public class FormButton: FormRowType, FormRowTypeInteractable {
     
     public weak var section: FormSection?
     
+    // MARK: - Init
+    
+    public init() {}
+    
     // MARK: - FormRowType
     
     public func registerTableViewCellForTableView(tableView: UITableView) {

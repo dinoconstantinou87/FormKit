@@ -51,7 +51,7 @@ public class FormTextView: NSObject, FormRowTypeInteractable {
     
     public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
         guard let cell = abstract as? FormTextViewCell else { fatalError("Encountered unexpected cell type for FormTextViewCell") }
-        cell.textView.becomeFirstResponder()
+        cell.becomeFirstResponder()
     }
     
 }

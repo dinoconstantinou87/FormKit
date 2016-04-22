@@ -12,6 +12,8 @@
 		607FACD81AFB9204008FA782 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* EventDetailViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		C99E50C81CCA218600F219E1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E50C71CCA218600F219E1 /* LoginViewController.swift */; };
+		C99E50CA1CCA23AE00F219E1 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99E50C91CCA23AE00F219E1 /* MenuViewController.swift */; };
 		F48E521B065198E6D9BA33DD /* Pods_FormKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E506842281D5FDC7B3D9B1F9 /* Pods_FormKit_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		9F429220301511DB469DB392 /* FormKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FormKit.podspec; path = ../FormKit.podspec; sourceTree = "<group>"; };
 		B2614B1AF391A269868E7C8B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B94B60ACA7FECC2B78CB52F2 /* Pods-FormKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormKit_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FormKit_Tests/Pods-FormKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		C99E50C71CCA218600F219E1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		C99E50C91CCA23AE00F219E1 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E506842281D5FDC7B3D9B1F9 /* Pods_FormKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,7 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				C99E50C71CCA218600F219E1 /* LoginViewController.swift */,
 				607FACD71AFB9204008FA782 /* EventDetailViewController.swift */,
+				C99E50C91CCA23AE00F219E1 /* MenuViewController.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -352,8 +358,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C99E50C81CCA218600F219E1 /* LoginViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* EventDetailViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				C99E50CA1CCA23AE00F219E1 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
