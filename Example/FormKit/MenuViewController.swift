@@ -19,6 +19,7 @@ class MenuViewController: FormViewController {
         title = "Menu"
         
         let section = FormSection()
+        section.header = FormSectionHeaderFooter(title: "DEMOS")
         section.appendFormRow({
             let row = FormRow()
             row.title = "Login Form"
@@ -42,20 +43,8 @@ class MenuViewController: FormViewController {
                 cell.accessoryType = .DisclosureIndicator
             }
             
-            row.tap = { [unowned self] (_) in
+            row.tap = { [unowned self] (cell) in
                 self.pushEventDetailViewController()
-            }
-            
-            return row
-        }())
-        
-        
-        section.appendFormRow({
-            let row = FormButton()
-            row.title = "Clear History and Website Data"
-
-            row.tap = { [unowned self] (_) in
-                self.clear()
             }
             
             return row

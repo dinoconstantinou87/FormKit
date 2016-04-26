@@ -7,10 +7,6 @@
 
 FormKit is API for easily building UITableView based forms in iOS. You create models that represent your form and FormKit takes care of the rest.
 
-### Table of Contents
-1. [Setup](#setup)
-2. [Usage](#usage)
-
 ## Setup
 
 ### Requirements
@@ -180,7 +176,7 @@ row.stringRepresentatonForOption = { $0.rawValue }
 
 #### FormDateTime
 
-A row for accepting Date and/or Time input from a FormDateTimePicker
+A row for accepting Date and/or Time input from a FormDateTimePicker. This row will insert and remove a FormDateTimePicker beneath the row in the same way that you find in the Event form within the Calendar app.
 
 ```swift
 let row = FormDateTime(formatter: self.dateTimeFormatter)
@@ -193,7 +189,7 @@ row.valueDidChange = { [unowned self] (date) in
 
 #### FormDateTimePicker
 
-A row for accepting Date and/or Time input from a UIDatePicker
+A row for accepting Date and/or Time input from a UIDatePicker. This will show a row with a standalone UIDatePicker.
 
 ```swift
 let row = FormDateTimePicker()
@@ -210,9 +206,18 @@ A row for showing a button
 let row = FormButton()
 row.title = "Clear History and Website Data"
 
-row.tap = { [unowned self] (_) in
+row.tap = { [unowned self] (cell) in
     self.clear()
 }
+```
+
+### Form Section Header Footer Types
+
+There is currently one type of FormSectionHeaderFooterType that can be used to show section header or footer text similar to how it would appear in the Settings app.
+
+```swift
+let section = FormSection()
+section.header = FormSectionHeaderFooter(title: "DEMOS")
 ```
 
 ## Author
