@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Form {
+open class Form {
 
     // MARK: - Properties
 
@@ -18,7 +18,7 @@ public class Form {
         }
     }
     
-    public private(set) var sections = [ FormSection ]()
+    open private(set) var sections = [ FormSection ]()
  
     // MARK: - Init
 
@@ -36,19 +36,19 @@ public class Form {
 
     // MARK: - Public Methods
 
-    public func appendFormSection(section: FormSection) {
+    open func appendFormSection(_ section: FormSection) {
         section.form = self
         section.tableView = tableView
 
         sections.append(section)
     }
 
-    public func rowForIndexPath(indexPath: NSIndexPath) -> FormRowType {
-        return sections[indexPath.section].rows[indexPath.row]
+    open func rowForIndexPath(_ indexPath: IndexPath) -> FormRowType {
+        return sections[(indexPath as NSIndexPath).section].rows[(indexPath as NSIndexPath).row]
     }
     
-    public func indexForSection(section: FormSection) -> Int? {
-        for (index, object) in sections.enumerate() {
+    open func indexForSection(_ section: FormSection) -> Int? {
+        for (index, object) in sections.enumerated() {
             if section === object {
                 return index
             }
@@ -57,7 +57,7 @@ public class Form {
         return nil
     }
 
-    public func rows() -> [ FormRowType ] {
+    open func rows() -> [ FormRowType ] {
         return sections.map({ return $0.rows }).flatMap({ return $0 })
     }
 

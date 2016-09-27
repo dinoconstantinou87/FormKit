@@ -10,17 +10,17 @@ import Foundation
 
 extension UITableView {
 
-    func dequeueReusableCellForIndexPath<T>(indexPath indexPath: NSIndexPath) -> T {
-        guard let cell = dequeueReusableCellWithIdentifier(String(T), forIndexPath: indexPath) as? T else {
-            fatalError("Encountered unexpected cell type for identifier: \(String(T))")
+    func dequeueReusableCellForIndexPath<T>(indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: String(describing: T.self), for: indexPath) as? T else {
+            fatalError("Encountered unexpected cell type for identifier: \(String(describing: T.self))")
         }
         
         return cell
     }
 
     func dequeueReusableHeaderFooterView<T>() -> T {
-        guard let view = self.dequeueReusableHeaderFooterViewWithIdentifier(String(T)) as? T else {
-            fatalError("Encountered unexpected header footer view type for identifier: \(String(T))")
+        guard let view = self.dequeueReusableHeaderFooterView(withIdentifier: String(describing: T.self)) as? T else {
+            fatalError("Encountered unexpected header footer view type for identifier: \(String(describing: T.self))")
         }
         
         return view

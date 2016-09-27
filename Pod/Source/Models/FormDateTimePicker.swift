@@ -8,21 +8,21 @@
 
 import Foundation
 
-public class FormDateTimePicker: NSObject, FormRowType {
+open class FormDateTimePicker: NSObject, FormRowType {
 
     // MARK: - Properties
 
-    public var valueDidChange: ((NSDate) -> ())?
-    public weak var section: FormSection?
+    open var valueDidChange: ((Date) -> ())?
+    open weak var section: FormSection?
 
-    public var date = NSDate() {
+    open var date = Date() {
         didSet {
             guard let section = section else { return }
             section.reloadFormRow(self)
         }
     }
     
-    public var mode: UIDatePickerMode = .DateAndTime {
+    open var mode: UIDatePickerMode = .dateAndTime {
         didSet {
             guard let section = section else { return }
             section.reloadFormRow(self)
@@ -31,26 +31,26 @@ public class FormDateTimePicker: NSObject, FormRowType {
 
     // MARK: - Internal Methods
     
-    func valueDidChangeForDatePicker(pickerView: UIDatePicker) {
+    func valueDidChangeForDatePicker(_ pickerView: UIDatePicker) {
         date = pickerView.date
         valueDidChange?(date)
     }
     
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormDateTimePickerCell.self, forCellReuseIdentifier: String(FormDateTimePickerCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormDateTimePickerCell.self, forCellReuseIdentifier: String(describing: FormDateTimePickerCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormDateTimePickerCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormDateTimePickerCell.self), for: indexPath)
     }
     
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormDateTimePickerCell else { fatalError("Encountered unexpected cell type for FormDateTimePickerCell") }
         cell.pickerView.date = date
         cell.pickerView.datePickerMode = mode
-        cell.pickerView.addTarget(self, action: #selector(self.valueDidChangeForDatePicker(_:)), forControlEvents: .ValueChanged)
+        cell.pickerView.addTarget(self, action: #selector(self.valueDidChangeForDatePicker(_:)), for: .valueChanged)
     }
 
 }

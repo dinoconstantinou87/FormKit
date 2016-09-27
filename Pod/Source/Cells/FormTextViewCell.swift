@@ -9,20 +9,20 @@
 import UIKit
 import PureLayout
 
-public class FormTextViewCell: UITableViewCell, UITextViewDelegate {
+open class FormTextViewCell: UITableViewCell, UITextViewDelegate {
     
-    lazy public private(set) var textView: UITextView = {
+    lazy open private(set) var textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = UIFont.systemFontOfSize(17.0)
-        textView.textContainerInset = UIEdgeInsetsZero;
+        textView.font = UIFont.systemFont(ofSize: 17.0)
+        textView.textContainerInset = UIEdgeInsets.zero;
         textView.textContainer.lineFragmentPadding = 0;
         textView.delegate = self
 
         return textView
     }()
     
-    lazy public private(set) var placeholderLabel: UILabel = {
+    lazy open private(set) var placeholderLabel: UILabel = {
         let placeholderLabel = UILabel()
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         placeholderLabel.textColor = UIColor(red: 199.0 / 255, green: 199.0 / 255, blue: 205.0 / 255, alpha: 1.0)
@@ -30,23 +30,23 @@ public class FormTextViewCell: UITableViewCell, UITextViewDelegate {
         return placeholderLabel
     }()
     
-    public var valueDidChange: ((String?) -> ())?
+    open var valueDidChange: ((String?) -> ())?
     
     // MARK: - Init
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        selectionStyle = .None
+        selectionStyle = .none
         
         contentView.addSubview(textView)
         contentView.addSubview(placeholderLabel)
 
         textView.autoPinEdgesToSuperviewMargins()
-        textView.autoSetDimension(.Height, toSize: 160.0)
+        textView.autoSetDimension(.height, toSize: 160.0)
         
-        placeholderLabel.autoPinEdgeToSuperviewMargin(.Left)
-        placeholderLabel.autoPinEdgeToSuperviewMargin(.Top)
+        placeholderLabel.autoPinEdge(toSuperviewMargin: .left)
+        placeholderLabel.autoPinEdge(toSuperviewMargin: .top)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -55,26 +55,26 @@ public class FormTextViewCell: UITableViewCell, UITextViewDelegate {
 
     // MARK: UIResponder
     
-    public override func canBecomeFirstResponder() -> Bool {
-        return textView.canBecomeFirstResponder()
+    open override var canBecomeFirstResponder : Bool {
+        return textView.canBecomeFirstResponder
     }
     
-    public override func becomeFirstResponder() -> Bool {
+    open override func becomeFirstResponder() -> Bool {
         return textView.becomeFirstResponder()
     }
     
-    public override func canResignFirstResponder() -> Bool {
-        return textView.canResignFirstResponder()
+    open override var canResignFirstResponder : Bool {
+        return textView.canResignFirstResponder
     }
     
-    public override func resignFirstResponder() -> Bool {
+    open override func resignFirstResponder() -> Bool {
         return textView.resignFirstResponder()
     }
     
     // MARK: - UITextViewDelegate
     
-    public func textViewDidChange(textView: UITextView) {
-        placeholderLabel.hidden = textView.text.isEmpty == false
+    open func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = textView.text.isEmpty == false
         valueDidChange?(textView.text)
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormOptionListViewController<T where T: Hashable>: FormViewController {
+open class FormOptionListViewController<T>: FormViewController where T: Hashable {
     
     // MARK: - Properties
     
@@ -20,8 +20,12 @@ public class FormOptionListViewController<T where T: Hashable>: FormViewControll
     public override init(style: UITableViewStyle) {
         super.init(style: style)
     }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         title = row.title
         
@@ -44,12 +48,12 @@ public class FormOptionListViewController<T where T: Hashable>: FormViewControll
                     row.tap = { [unowned self] (cell) in
                         
                         switch self.row.selectionType {
-                        case .Single:
+                        case .single:
                             self.row.selection = option
                             break
-                        case .Multiple:
-                            if let index = self.row.selections.indexOf(option) {
-                                self.row.selections.removeAtIndex(index)
+                        case .multiple:
+                            if let index = self.row.selections.index(of: option) {
+                                self.row.selections.remove(at: index)
                             } else {
                                 self.row.selections.insert(option)
                             }
@@ -64,14 +68,14 @@ public class FormOptionListViewController<T where T: Hashable>: FormViewControll
                     
                     row.configureCell = { [unowned self] (cell) in
                         switch self.row.selectionType {
-                        case .Single:
+                        case .single:
                             if let selection = self.row.selection {
-                                cell.accessoryType = option == selection ? .Checkmark : .None
+                                cell.accessoryType = option == selection ? .checkmark : .none
                             }
                             
                             break
-                        case .Multiple:
-                            cell.accessoryType = self.row.selections.contains(option) ? .Checkmark : .None
+                        case .multiple:
+                            cell.accessoryType = self.row.selections.contains(option) ? .checkmark : .none
                             break
                         }
                     }

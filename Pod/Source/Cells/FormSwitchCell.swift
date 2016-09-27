@@ -8,18 +8,18 @@
 
 import UIKit
 
-public class FormSwitchCell: FormRowCell {
+open class FormSwitchCell: FormRowCell {
 
     // MARK: - Properties
     
-    lazy public private(set) var control = UISwitch()
+    lazy open private(set) var control = UISwitch()
     
     // MARK: - Init
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .None
+        selectionStyle = .none
         accessoryView = control
     }
     
@@ -29,9 +29,9 @@ public class FormSwitchCell: FormRowCell {
 
     // MARK: - UITableViewCell
     
-    public override func prepareForReuse() {
+    open override func prepareForReuse() {
         super.prepareForReuse()
-        control.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        control.removeTarget(nil, action: nil, for: .allEvents)
     }
 
 }

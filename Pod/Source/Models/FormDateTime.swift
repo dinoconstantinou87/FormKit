@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class FormDateTime: FormRowType, FormRowTypeInteractable {
+open class FormDateTime: FormRowType, FormRowTypeInteractable {
     
     // MARK: - Properties
     
-    public var title: String?
-    public var date: NSDate?
-    public var valueDidChange: ((NSDate) -> ())?
+    open var title: String?
+    open var date: Date?
+    open var valueDidChange: ((Date) -> ())?
     
-    public weak var section: FormSection?
+    open weak var section: FormSection?
 
-    public var formatter: NSDateFormatter {
+    open var formatter: DateFormatter {
         didSet {
             guard let section = section else { return }
             section.reloadFormRow(self)
         }
     }
     
-    public var mode: UIDatePickerMode = .DateAndTime {
+    open var mode: UIDatePickerMode = .dateAndTime {
         didSet {
             picker.mode = mode
         }
@@ -34,7 +34,7 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     lazy private var picker: FormDateTimePicker = {
         let picker = FormDateTimePicker()
         picker.valueDidChange = { [unowned self] (date) in
-            self.date = date
+            self.date = date as Date
             self.section?.reloadFormRow(self)
         }
 
@@ -43,7 +43,7 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     
     // MARK: - Init
     
-    public init(formatter: NSDateFormatter) {
+    public init(formatter: DateFormatter) {
         self.formatter = formatter
     }
     
@@ -53,7 +53,7 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
         guard let section = section else { return }
         guard let indexPath = section.indexPathForRow(self) else { return }
         
-        section.insertFormRow(picker, atIndex: indexPath.row.successor())
+        section.insertFormRow(picker, atIndex: ((indexPath as NSIndexPath).row + 1))
         section.reloadFormRow(self)
     }
     
@@ -66,20 +66,20 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
     
     private func stringForDate() -> String? {
         guard let date = date else { return nil }
-        return formatter.stringFromDate(date)
+        return formatter.string(from: date)
     }
     
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormRowCell.self, forCellReuseIdentifier: String(FormRowCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormRowCell.self, forCellReuseIdentifier: String(describing: FormRowCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormRowCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormRowCell.self), for: indexPath)
     }
     
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.titleLabel.text = title
         cell.valueLabel.text = stringForDate()
@@ -93,14 +93,14 @@ public class FormDateTime: FormRowType, FormRowTypeInteractable {
         }
     }
 
-    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+    open func controller(_ controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: IndexPath) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
-        controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        controller.tableView.deselectRow(at: indexPath, animated: true)
         
-        if cell.isFirstResponder() {
-            cell.resignFirstResponder()
+        if cell.isFirstResponder {
+            _ = cell.resignFirstResponder()
         } else {
-            cell.becomeFirstResponder()
+            _ = cell.becomeFirstResponder()
         }
     }
 

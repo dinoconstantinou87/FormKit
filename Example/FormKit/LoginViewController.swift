@@ -32,9 +32,9 @@ class LoginViewController: FormViewController {
         let email = FormTextField()
         email.title = "Email"
         email.configureCell = { [unowned self] (cell) in
-            cell.textField.keyboardType = .EmailAddress
-            cell.textField.autocorrectionType = .No
-            cell.textField.autocapitalizationType = .None
+            cell.textField.keyboardType = .emailAddress
+            cell.textField.autocorrectionType = .no
+            cell.textField.autocapitalizationType = .none
         }
         
         return email
@@ -44,9 +44,9 @@ class LoginViewController: FormViewController {
         let password = FormTextField()
         password.title = "Password"
         password.configureCell = { [unowned self] (cell) in
-            cell.textField.secureTextEntry = true
-            cell.textField.autocorrectionType = .No
-            cell.textField.autocapitalizationType = .None
+            cell.textField.isSecureTextEntry = true
+            cell.textField.autocorrectionType = .no
+            cell.textField.autocapitalizationType = .none
         }
 
         return password

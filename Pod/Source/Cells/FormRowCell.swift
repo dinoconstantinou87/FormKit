@@ -9,23 +9,23 @@
 import UIKit
 import PureLayout
 
-public class FormRowCell: UITableViewCell {
+open class FormRowCell: UITableViewCell {
 
     var didBecomeFirstResponder: (() -> ())?
     var didResignFirstResponder: (() -> ())?
     
-    lazy public private(set) var titleLabel: UILabel = {
+    lazy open private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         return titleLabel
     }()
 
-    lazy public private(set) var valueLabel: UILabel = {
+    lazy open private(set) var valueLabel: UILabel = {
         let valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        valueLabel.textAlignment = .Right
-        valueLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+        valueLabel.textAlignment = .right
+        valueLabel.textColor = UIColor.black.withAlphaComponent(0.4)
         
         return valueLabel
     }()
@@ -38,10 +38,10 @@ public class FormRowCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(valueLabel)
 
-        titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Trailing)
+        titleLabel.autoPinEdges(toSuperviewMarginsExcludingEdge: .trailing)
         
-        valueLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Leading)
-        valueLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: titleLabel, withOffset: 0.0)
+        valueLabel.autoPinEdges(toSuperviewMarginsExcludingEdge: .leading)
+        valueLabel.autoPinEdge(.leading, to: .trailing, of: titleLabel, withOffset: 0.0)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -50,23 +50,23 @@ public class FormRowCell: UITableViewCell {
     
     // MARK: - UIResponder
     
-    public override func canBecomeFirstResponder() -> Bool {
+    open override var canBecomeFirstResponder : Bool {
         return true
     }
 
-    public override func canResignFirstResponder() -> Bool {
+    open override var canResignFirstResponder : Bool {
         return true
     }
     
-    public override func becomeFirstResponder() -> Bool {
+    open override func becomeFirstResponder() -> Bool {
         valueLabel.textColor = tintColor
         didBecomeFirstResponder?()
         
         return super.becomeFirstResponder()
     }
 
-    public override func resignFirstResponder() -> Bool {
-        valueLabel.textColor = UIColor.blackColor().colorWithAlphaComponent(0.4)
+    open override func resignFirstResponder() -> Bool {
+        valueLabel.textColor = UIColor.black.withAlphaComponent(0.4)
         didResignFirstResponder?()
         
         return super.resignFirstResponder()

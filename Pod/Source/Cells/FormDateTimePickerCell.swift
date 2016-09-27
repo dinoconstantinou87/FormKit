@@ -9,9 +9,9 @@
 import UIKit
 import PureLayout
 
-public class FormDateTimePickerCell: UITableViewCell {
+open class FormDateTimePickerCell: UITableViewCell {
 
-    lazy public private(set) var pickerView: UIDatePicker = {
+    lazy open private(set) var pickerView: UIDatePicker = {
         let pickerView = UIDatePicker()
         pickerView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -23,7 +23,7 @@ public class FormDateTimePickerCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        selectionStyle = .None
+        selectionStyle = .none
 
         contentView.addSubview(pickerView)
         pickerView.autoPinEdgesToSuperviewMargins()
@@ -36,9 +36,9 @@ public class FormDateTimePickerCell: UITableViewCell {
     
     // MARK: - UITableViewCell
     
-    public override func prepareForReuse() {
+    open override func prepareForReuse() {
         super.prepareForReuse()
-        pickerView.removeTarget(nil, action: nil, forControlEvents: .AllEvents)
+        pickerView.removeTarget(nil, action: nil, for: .allEvents)
     }
 
 }

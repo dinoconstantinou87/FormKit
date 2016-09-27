@@ -8,12 +8,12 @@
 
 import UIKit
 
-public class FormButtonCell: UITableViewCell {
+open class FormButtonCell: UITableViewCell {
     
-    lazy public private(set) var titleLabel: UILabel = {
+    lazy open private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textAlignment = .Center
+        titleLabel.textAlignment = .center
         
         return titleLabel
     }()
@@ -41,7 +41,7 @@ public class FormButtonCell: UITableViewCell {
     
     // MARK: - UIView
     
-    override public func tintColorDidChange() {
+    override open func tintColorDidChange() {
         super.tintColorDidChange()
         configureTitleLabel()
     }
