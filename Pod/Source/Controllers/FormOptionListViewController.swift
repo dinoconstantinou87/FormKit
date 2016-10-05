@@ -13,7 +13,7 @@ open class FormOptionListViewController<T>: FormViewController where T: Hashable
     // MARK: - Properties
     
     var row = FormOptionList<T>()
-    var selection: (() -> ())?
+    var selectionsDidChange: (() -> ())?
     
     // MARK: - UIViewController
     
@@ -63,7 +63,7 @@ open class FormOptionListViewController<T>: FormViewController where T: Hashable
                             break
                         }
                         
-                        self.selection?()
+                        self.selectionsDidChange?()
                     }
                     
                     row.configureCell = { [unowned self] (cell) in

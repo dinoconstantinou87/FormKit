@@ -27,6 +27,9 @@ open class FormOptionList<T>: FormRowTypeInteractable where T: Hashable {
     
     open var selectionType: SelectionType = .single
     
+    open var selectionDidChange: ((T?) -> ())?
+    open var selectionsDidChange: ((Set<T>) -> ())?
+    
     open weak var section: FormSection?
 
     // MARK: - Init
@@ -68,10 +71,20 @@ open class FormOptionList<T>: FormRowTypeInteractable where T: Hashable {
 
         let viewController = FormOptionListViewController<T>(style: .grouped)
         viewController.row = self
-        viewController.selection = { [unowned self] in
+        viewController.selectionsDidChange = { [weak self] in
             controller.tableView.reloadRows(at: [ indexPath ], with: .none)
 
-            if self.selectionType == .single {
+            guard let me = self else { return }
+            
+            switch me.selectionType {
+                case .single:
+                    me.selectionDidChange?(me.selection)
+                    _ = controller.navigationController?.popViewController(animated: true)
+                case .multiple:
+                    me.selectionsDidChange?(me.selections)
+            }
+
+            if me.selectionType == .single {
                 _ = controller.navigationController?.popViewController(animated: true)
             }
         }
