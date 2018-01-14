@@ -15,6 +15,8 @@ class LoginViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = NSLocalizedString("Log In", comment: "Log In")
 
         let section = FormSection()
         section.appendFormRow(self.email)

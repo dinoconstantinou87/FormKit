@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PureLayout
 
 open class FormDateTimePickerCell: UITableViewCell {
 

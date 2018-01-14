@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import PureLayout
 
-open class FormTextFieldCell: UITableViewCell {
+public class FormTextFieldCell: UITableViewCell {
     
     lazy open private(set) var textField: UITextField = {
         let textField = UITextField()
@@ -25,7 +24,9 @@ open class FormTextFieldCell: UITableViewCell {
 
         selectionStyle = .none
  
+        contentView.layoutMargins = .init(top: 12.0, left: 15.0, bottom: 12.0, right: 15.0)
         contentView.addSubview(textField)
+        
         textField.autoPinEdgesToSuperviewMargins()
     }
     

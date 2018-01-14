@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormSwitchCell: FormRowCell {
+public class FormSwitchCell: FormRowCell {
 
     // MARK: - Properties
     

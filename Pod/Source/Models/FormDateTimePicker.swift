@@ -31,7 +31,7 @@ open class FormDateTimePicker: NSObject, FormRowType {
 
     // MARK: - Internal Methods
     
-    func valueDidChangeForDatePicker(_ pickerView: UIDatePicker) {
+    @objc func valueDidChangeForDatePicker(_ pickerView: UIDatePicker) {
         date = pickerView.date
         valueDidChange?(date)
     }

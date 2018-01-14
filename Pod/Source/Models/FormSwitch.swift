@@ -20,7 +20,7 @@ open class FormSwitch: NSObject, FormRowType {
 
     // MARK: - Internal Methods
     
-    func valueChanged(_ control: UISwitch) {
+    @objc func valueChanged(_ control: UISwitch) {
         on = control.isOn
         valueDidChange?(on)
     }

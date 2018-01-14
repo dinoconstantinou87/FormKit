@@ -21,7 +21,7 @@ open class FormTextField: NSObject, FormRowTypeInteractable {
     
     // MARK: - Internal Methods
     
-    func valueDidChangeForTextField(_ textField: UITextField) {
+    @objc func valueDidChangeForTextField(_ textField: UITextField) {
         text = textField.text
         valueDidChange?(text)
     }

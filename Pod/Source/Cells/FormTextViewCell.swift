@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import PureLayout
 
-open class FormTextViewCell: UITableViewCell, UITextViewDelegate {
+public class FormTextViewCell: UITableViewCell, UITextViewDelegate {
     
     lazy open private(set) var textView: UITextView = {
         let textView = UITextView()
@@ -43,10 +42,10 @@ open class FormTextViewCell: UITableViewCell, UITextViewDelegate {
         contentView.addSubview(placeholderLabel)
 
         textView.autoPinEdgesToSuperviewMargins()
-        textView.autoSetDimension(.height, toSize: 160.0)
+        textView.heightAnchor.constraint(equalToConstant: 160.0).isActive = true
         
-        placeholderLabel.autoPinEdge(toSuperviewMargin: .left)
-        placeholderLabel.autoPinEdge(toSuperviewMargin: .top)
+        placeholderLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor).isActive = true
+        placeholderLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
     }
     
     required public init?(coder aDecoder: NSCoder) {

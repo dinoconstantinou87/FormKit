@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormButtonCell: UITableViewCell {
+public class FormButtonCell: UITableViewCell {
     
     lazy open private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -24,8 +24,9 @@ open class FormButtonCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         contentView.addSubview(titleLabel)
-        titleLabel.autoPinEdgesToSuperviewMargins()
+        contentView.layoutMargins = .init(top: 12.0, left: 15.0, bottom: 12.0, right: 15.0)
         
+        titleLabel.autoPinEdgesToSuperviewMargins()
         configureTitleLabel()
     }
  

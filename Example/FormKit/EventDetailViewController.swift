@@ -12,7 +12,7 @@ import FormKit
 struct Event {
     enum Repeat: String {
         case Never
-        case EveryDay = "Every Day"
+        case EveryDay = "OEvery Day"
         case EveryWeek = "Every Week"
         case EveryTwoWeeks = "Every Two Weeks"
         case EveryMonth = "Every Month"

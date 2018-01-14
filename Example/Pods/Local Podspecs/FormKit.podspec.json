@@ -1,8 +1,7 @@
 {
   "name": "FormKit",
-  "version": "0.1.0",
-  "summary": "A short description of FormKit.",
-  "description": "",
+  "version": "0.2",
+  "summary": "Easily build UITableView based forms. Written in Swift 4.",
   "homepage": "https://github.com/dconstantinou/FormKit",
   "license": "MIT",
   "authors": {
@@ -10,21 +9,11 @@
   },
   "source": {
     "git": "https://github.com/dconstantinou/FormKit.git",
-    "tag": "0.1.0"
+    "tag": "0.2"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "9.0"
   },
   "requires_arc": true,
-  "source_files": "Pod/Source/**/*",
-  "resource_bundles": {
-    "FormKit": [
-      "Pod/Assets/*.png"
-    ]
-  },
-  "dependencies": {
-    "PureLayout": [
-      "~> 3.0.1"
-    ]
-  }
+  "source_files": "Pod/Source/**/*"
 }
