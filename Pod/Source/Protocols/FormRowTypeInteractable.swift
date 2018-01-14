@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol FormRowTypeInteractable: FormRowType {
-    func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath)
+    func controller(_ controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: IndexPath)
 }

@@ -8,43 +8,41 @@
 
 import UIKit
 
-public class FormViewController: UITableViewController {
+open class FormViewController: UITableViewController {
     
     // MARK: - Properties
     
-    public var form = Form() {
+    open var form = Form() {
         didSet {
             form.tableView = tableView
         }
     }
 
-    public var automaticallyBecomesFirstReponder = false
+    open var automaticallyBecomesFirstReponder = false
     private var hasAutomaticallyBecomeFirstResponder = false
 
     // MARK: - Init
     
     convenience init() {
-        self.init(style: .Grouped)
+        self.init(style: .grouped)
     }
     
     // MARK: - UIViewController
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.estimatedSectionHeaderHeight = 44.0
-        tableView.estimatedSectionFooterHeight = 44.0
+
         tableView.estimatedRowHeight = 44.0
-        tableView.keyboardDismissMode = .OnDrag
+        tableView.keyboardDismissMode = .onDrag
     }
     
-    public override func viewDidAppear(animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         automaticallyBecomeFirstResponder()
     }
     
-    public override func viewDidDisappear(animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         view.endEditing(true)
     }
@@ -53,22 +51,22 @@ public class FormViewController: UITableViewController {
     
     private func automaticallyBecomeFirstResponder() {
         if automaticallyBecomesFirstReponder && hasAutomaticallyBecomeFirstResponder == false {
-            tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.becomeFirstResponder()
+            tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.becomeFirstResponder()
             hasAutomaticallyBecomeFirstResponder = true
         }
     }
 
     // MARK: - UITableViewDataSource
     
-    public override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return form.sections.count
     }
     
-    public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return form.sections[section].rows.count
     }
     
-    public override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = form.rowForIndexPath(indexPath)
         let cell = row.dequeueReusableTableViewCellForTableView(tableView, indexPath: indexPath)
         row.configureTableViewCell(cell)
@@ -78,7 +76,7 @@ public class FormViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
-    public override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    open override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if form.rowForIndexPath(indexPath) is FormRowTypeInteractable == false {
             return tableView.indexPathForSelectedRow
         }
@@ -86,27 +84,19 @@ public class FormViewController: UITableViewController {
         return indexPath
     }
     
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let row = form.rowForIndexPath(indexPath) as? FormRowTypeInteractable else { return }
-        guard let cell = tableView.cellForRowAtIndexPath(indexPath) else { fatalError("Expected table view cell to be returned for index path \(indexPath)") }
+        guard let cell = tableView.cellForRow(at: indexPath) else { fatalError("Expected table view cell to be returned for index path \(indexPath)") }
         
         row.controller(self, didSelectCell: cell, forIndexPath: indexPath)
     }
 
-    public override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = form.sections[section].header else { return nil }
-        let view = header.dequeueReusableTableHeaderFooterForTableView(tableView, section: section)
-        header.configureTableHeaderFooterView(view)
-        
-        return view
+    override open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return form.sections[section].header?.title
     }
-
-    public override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let footer = form.sections[section].footer else { return nil }
-        let view = footer.dequeueReusableTableHeaderFooterForTableView(tableView, section: section)
-        footer.configureTableHeaderFooterView(view)
-        
-        return view
+    
+    override open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return form.sections[section].footer?.title
     }
    
 }

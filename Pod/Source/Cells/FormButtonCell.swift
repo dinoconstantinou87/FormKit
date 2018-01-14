@@ -10,10 +10,10 @@ import UIKit
 
 public class FormButtonCell: UITableViewCell {
     
-    lazy public private(set) var titleLabel: UILabel = {
+    lazy open private(set) var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.textAlignment = .Center
+        titleLabel.textAlignment = .center
         
         return titleLabel
     }()
@@ -24,8 +24,9 @@ public class FormButtonCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         contentView.addSubview(titleLabel)
-        titleLabel.autoPinEdgesToSuperviewMargins()
+        contentView.layoutMargins = .init(top: 12.0, left: 15.0, bottom: 12.0, right: 15.0)
         
+        titleLabel.autoPinEdgesToSuperviewMargins()
         configureTitleLabel()
     }
  
@@ -41,7 +42,7 @@ public class FormButtonCell: UITableViewCell {
     
     // MARK: - UIView
     
-    override public func tintColorDidChange() {
+    override open func tintColorDidChange() {
         super.tintColorDidChange()
         configureTitleLabel()
     }

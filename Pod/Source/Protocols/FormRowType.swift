@@ -11,7 +11,7 @@ import UIKit
 public protocol FormRowType: class {
     weak var section: FormSection? {get set}
     
-    func registerTableViewCellForTableView(tableView: UITableView)
-    func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell
-    func configureTableViewCell(cell: UITableViewCell)
+    func registerTableViewCellForTableView(_ tableView: UITableView)
+    func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell
+    func configureTableViewCell(_ cell: UITableViewCell)
 }

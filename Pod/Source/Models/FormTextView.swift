@@ -8,35 +8,35 @@
 
 import UIKit
 
-public class FormTextView: NSObject, FormRowTypeInteractable {
+open class FormTextView: NSObject, FormRowTypeInteractable {
     
     // MARK: - Properties
     
-    public var title: String?
-    public var text: String?
-    public var configureCell: ((cell: FormTextViewCell) -> ())?
-    public var valueDidChange: ((String?) -> ())?
+    open var title: String?
+    open var text: String?
+    open var configureCell: ((_ cell: FormTextViewCell) -> ())?
+    open var valueDidChange: ((String?) -> ())?
     
-    public weak var section: FormSection?
+    open weak var section: FormSection?
     
     // MARK: - Private Methods
     
-    private func valueChanged(text: String?) {
+    private func valueChanged(_ text: String?) {
         self.text = text
         valueDidChange?(text)
     }
     
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormTextViewCell.self, forCellReuseIdentifier: String(FormTextViewCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormTextViewCell.self, forCellReuseIdentifier: String(describing: FormTextViewCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormTextViewCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormTextViewCell.self), for: indexPath)
     }
     
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormTextViewCell else { fatalError("Encountered unexpected cell type for FormTextField") }
         cell.placeholderLabel.text = title
         cell.textView.text = text
@@ -44,14 +44,14 @@ public class FormTextView: NSObject, FormRowTypeInteractable {
             self.valueChanged(text)
         }
 
-        configureCell?(cell: cell)
+        configureCell?(cell)
     }
     
     // MARK: - FormRowTypeInteractable
     
-    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+    open func controller(_ controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: IndexPath) {
         guard let cell = abstract as? FormTextViewCell else { fatalError("Encountered unexpected cell type for FormTextViewCell") }
-        cell.becomeFirstResponder()
+        _ = cell.becomeFirstResponder()
     }
     
 }
