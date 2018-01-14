@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "FormKit"
-  s.version          = "0.2"
+  s.version          = "0.2.1"
   s.summary          = "Easily build UITableView based forms. Written in Swift 4."
 
   s.homepage         = "https://github.com/dconstantinou/FormKit"
