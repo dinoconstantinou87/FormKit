@@ -1,6 +1,5 @@
 # FormKit
 
-[![CI Status](http://img.shields.io/travis/Dino Constantinou/FormKit.svg?style=flat)](https://travis-ci.org/Dino Constantinou/FormKit)
 [![Version](https://img.shields.io/cocoapods/v/FormKit.svg?style=flat)](http://cocoapods.org/pods/FormKit)
 [![License](https://img.shields.io/cocoapods/l/FormKit.svg?style=flat)](http://cocoapods.org/pods/FormKit)
 [![Platform](https://img.shields.io/cocoapods/p/FormKit.svg?style=flat)](http://cocoapods.org/pods/FormKit)
@@ -11,7 +10,7 @@ FormKit is API for easily building UITableView based forms in iOS. You create mo
 
 ### Requirements
 
-- iOS 8.0+
+- iOS 9.0+
 - Xcode 7.3+
 
 ### Using [CocoaPods](http://cocoapods.org)
