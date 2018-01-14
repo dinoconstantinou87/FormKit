@@ -12,7 +12,7 @@ import FormKit
 struct Event {
     enum Repeat: String {
         case Never
-        case EveryDay = "Every Day"
+        case EveryDay = "OEvery Day"
         case EveryWeek = "Every Week"
         case EveryTwoWeeks = "Every Two Weeks"
         case EveryMonth = "Every Month"
@@ -26,8 +26,8 @@ struct Event {
     var title: String?
     var location: String?
     var day: Bool = false
-    var start = NSDate()
-    var end = NSDate()
+    var start = Date()
+    var end = Date()
     var repeats: Repeat = .Never
     var URL: NSURL?
     var notes: String?
@@ -82,16 +82,16 @@ class EventDetailViewController: FormViewController {
     private func configureDateFormatters() {
         if event.day {
             start.formatter = dateFormatter
-            start.mode = .Date
+            start.mode = .date
             
             end.formatter = dateFormatter
-            end.mode = .Date
+            end.mode = .date
         } else {
             start.formatter = dateTimeFormatter
-            start.mode = .DateAndTime
+            start.mode = .dateAndTime
             
             end.formatter = dateTimeFormatter
-            end.mode = .DateAndTime
+            end.mode = .dateAndTime
         }
     }
     
@@ -137,9 +137,10 @@ class EventDetailViewController: FormViewController {
     lazy private var start: FormDateTime = {
         let row = FormDateTime(formatter: self.dateTimeFormatter)
         row.title = "Start"
-        row.date = self.event.start
-        row.valueDidChange = { [unowned self] (date) in
-            self.event.start = date
+        row.date = self.event.start as Date
+        row.valueDidChange = { [weak self] (date) in
+            self?.event.start = date
+            return
         }
  
         return row
@@ -148,9 +149,9 @@ class EventDetailViewController: FormViewController {
     lazy private var end: FormDateTime = {
         let row = FormDateTime(formatter: self.dateTimeFormatter)
         row.title = "End"
-        row.date = self.event.end
-        row.valueDidChange = { [unowned self] (date) in
-            self.event.end = date
+        row.date = self.event.end as Date
+        row.valueDidChange = { [weak self] (date) in
+            self?.event.end = date
         }
  
         return row
@@ -173,8 +174,8 @@ class EventDetailViewController: FormViewController {
         
         row.configureCell = { (cell) in
             cell.textField.keyboardType = .URL
-            cell.textField.autocapitalizationType = .None
-            cell.textField.autocorrectionType = .No
+            cell.textField.autocapitalizationType = .none
+            cell.textField.autocorrectionType = .no
         }
         
         row.valueDidChange = { [unowned self] (text) in
@@ -200,17 +201,17 @@ class EventDetailViewController: FormViewController {
         return row
     }()
 
-    lazy var dateTimeFormatter: NSDateFormatter = {
-        let dateTimeFormatter = NSDateFormatter()
-        dateTimeFormatter.dateStyle = .MediumStyle
-        dateTimeFormatter.timeStyle = .MediumStyle
+    lazy var dateTimeFormatter: DateFormatter = {
+        let dateTimeFormatter = DateFormatter()
+        dateTimeFormatter.dateStyle = .medium
+        dateTimeFormatter.timeStyle = .medium
         
         return dateTimeFormatter
     }()
  
-    lazy var dateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .MediumStyle
+    lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
 
         return dateFormatter
     }()

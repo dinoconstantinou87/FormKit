@@ -8,38 +8,38 @@
 
 import UIKit
 
-public class FormSwitch: NSObject, FormRowType {
+open class FormSwitch: NSObject, FormRowType {
     
     // MARK: - Properties
     
-    public var title: String?
-    public var on: Bool = false
-    public var valueDidChange: ((Bool) -> ())?
+    open var title: String?
+    open var on: Bool = false
+    open var valueDidChange: ((Bool) -> ())?
     
-    public weak var section: FormSection?
+    open weak var section: FormSection?
 
     // MARK: - Internal Methods
     
-    func valueChanged(control: UISwitch) {
-        on = control.on
+    @objc func valueChanged(_ control: UISwitch) {
+        on = control.isOn
         valueDidChange?(on)
     }
 
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormSwitchCell.self, forCellReuseIdentifier: String(FormSwitchCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormSwitchCell.self, forCellReuseIdentifier: String(describing: FormSwitchCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormSwitchCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormSwitchCell.self), for: indexPath)
     }
     
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormSwitchCell else { fatalError("Encountered unexpected cell type for FormSwitch") }
         cell.titleLabel.text = title
-        cell.control.on = on
-        cell.control.addTarget(self, action: #selector(self.valueChanged(_:)), forControlEvents: .ValueChanged)
+        cell.control.isOn = on
+        cell.control.addTarget(self, action: #selector(self.valueChanged(_:)), for: .valueChanged)
     }
     
 }

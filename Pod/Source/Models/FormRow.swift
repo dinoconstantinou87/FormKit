@@ -8,17 +8,17 @@
 
 import Foundation
 
-public class FormRow: FormRowType, FormRowTypeInteractable {
+open class FormRow: FormRowType, FormRowTypeInteractable {
 
     // MARK: - Properties
 
-    public var title: String?
-    public var icon: UIImage?
+    open var title: String?
+    open var icon: UIImage?
     
-    public var tap: ((cell: FormRowCell) -> ())?
-    public var configureCell: ((cell: FormRowCell) -> ())?
+    open var tap: ((_ cell: FormRowCell) -> ())?
+    open var configureCell: ((_ cell: FormRowCell) -> ())?
     
-    public weak var section: FormSection?
+    open weak var section: FormSection?
 
     // MARK: - Init
 
@@ -26,27 +26,27 @@ public class FormRow: FormRowType, FormRowTypeInteractable {
 
     // MARK: - FormRowType
 
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormRowCell.self, forCellReuseIdentifier: String(FormRowCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormRowCell.self, forCellReuseIdentifier: String(describing: FormRowCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormRowCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormRowCell.self), for: indexPath)
     }
 
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.imageView?.image = icon
         cell.titleLabel.text = title
 
-        configureCell?(cell: cell)
+        configureCell?(cell)
     }
     
-    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+    open func controller(_ controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: IndexPath) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormRow") }
-        controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        controller.tableView.deselectRow(at: indexPath, animated: true)
 
-        tap?(cell: cell)
+        tap?(cell)
     }
 
 }

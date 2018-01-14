@@ -25,7 +25,7 @@ class MenuViewController: FormViewController {
             row.title = "Login Form"
 
             row.configureCell = { (cell) in
-                cell.accessoryType = .DisclosureIndicator
+                cell.accessoryType = .disclosureIndicator
             }
 
             row.tap = { [unowned self] (_) in
@@ -40,7 +40,7 @@ class MenuViewController: FormViewController {
             row.title = "Event Form"
             
             row.configureCell = { (cell) in
-                cell.accessoryType = .DisclosureIndicator
+                cell.accessoryType = .disclosureIndicator
             }
             
             row.tap = { [unowned self] (cell) in

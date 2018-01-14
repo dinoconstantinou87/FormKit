@@ -8,14 +8,14 @@
 
 import Foundation
 
-public class FormButton: FormRowType, FormRowTypeInteractable {
+open class FormButton: FormRowType, FormRowTypeInteractable {
     
     // MARK: - Properties
     
-    public var title: String?
-    public var tap: ((cell: UITableViewCell) -> ())?
+    open var title: String?
+    open var tap: ((_ cell: UITableViewCell) -> ())?
     
-    public weak var section: FormSection?
+    open weak var section: FormSection?
     
     // MARK: - Init
     
@@ -23,22 +23,22 @@ public class FormButton: FormRowType, FormRowTypeInteractable {
     
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormButtonCell.self, forCellReuseIdentifier: String(FormButtonCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormButtonCell.self, forCellReuseIdentifier: String(describing: FormButtonCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormButtonCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormButtonCell.self), for: indexPath)
     }
     
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormButtonCell else { fatalError("Encountered unexpected cell type for FormRow") }
         cell.titleLabel.text = title
     }
     
-    public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
-        controller.tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        tap?(cell: cell)
+    open func controller(_ controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: IndexPath) {
+        controller.tableView.deselectRow(at: indexPath, animated: true)
+        tap?(cell)
     }
     
 }

@@ -9,25 +9,28 @@
 import Foundation
 
 public enum SelectionType {
-    case Single
-    case Multiple
+    case single
+    case multiple
 }
 
-public class FormOptionList<T where T: Hashable>: FormRowTypeInteractable {
+open class FormOptionList<T>: FormRowTypeInteractable where T: Hashable {
     
     // MARK: - Properties
     
-    public var title: String?
-    public var options = [ T ]()
+    open var title: String?
+    open var options = [ T ]()
     
-    public var stringRepresentatonForOption: ((T) -> (String?))?
+    open var stringRepresentatonForOption: ((T) -> (String?))?
     
-    public var selection: T?
-    public var selections = Set<T>()
+    open var selection: T?
+    open var selections = Set<T>()
     
-    public var selectionType: SelectionType = .Single
+    open var selectionType: SelectionType = .single
     
-    public weak var section: FormSection?
+    open var selectionDidChange: ((T?) -> ())?
+    open var selectionsDidChange: ((Set<T>) -> ())?
+    
+    open weak var section: FormSection?
 
     // MARK: - Init
     
@@ -35,44 +38,54 @@ public class FormOptionList<T where T: Hashable>: FormRowTypeInteractable {
     
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormRowCell.self, forCellReuseIdentifier: String(FormRowCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormRowCell.self, forCellReuseIdentifier: String(describing: FormRowCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormRowCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormRowCell.self), for: indexPath)
     }
 
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormRowCell else { fatalError("Encountered unexpected cell type for FormOptions") }
         cell.titleLabel.text = title
-        cell.accessoryType = .DisclosureIndicator
+        cell.accessoryType = .disclosureIndicator
         
         switch selectionType {
-            case .Single:
+            case .single:
                 if let selection = selection {
                     cell.valueLabel.text = stringRepresentatonForOption?(selection)
                 } else {
                     cell.valueLabel.text = "None"
                 }
-            case .Multiple:
+            case .multiple:
                 cell.valueLabel.text = selections.count != 0 ?
-                    selections.map({ self.stringRepresentatonForOption?($0) ?? "" }).joinWithSeparator(", ") : "None"
+                    selections.map({ self.stringRepresentatonForOption?($0) ?? "" }).joined(separator: ", ") : "None"
         }
     }
     
     // MARK: - FormRowTypeInteractable
     
-    public func controller(controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+    open func controller(_ controller: FormViewController, didSelectCell cell: UITableViewCell, forIndexPath indexPath: IndexPath) {
         guard let navigationController = controller.navigationController else { fatalError("You must contain a form view controller within a navigation controller when using a FormOptionList.") }
 
-        let viewController = FormOptionListViewController<T>(style: .Grouped)
+        let viewController = FormOptionListViewController<T>(style: .grouped)
         viewController.row = self
-        viewController.selection = { [unowned self] in
-            controller.tableView.reloadRowsAtIndexPaths([ indexPath ], withRowAnimation: .None)
+        viewController.selectionsDidChange = { [weak self] in
+            controller.tableView.reloadRows(at: [ indexPath ], with: .none)
 
-            if self.selectionType == .Single {
-                controller.navigationController?.popViewControllerAnimated(true)
+            guard let me = self else { return }
+            
+            switch me.selectionType {
+                case .single:
+                    me.selectionDidChange?(me.selection)
+                    _ = controller.navigationController?.popViewController(animated: true)
+                case .multiple:
+                    me.selectionsDidChange?(me.selections)
+            }
+
+            if me.selectionType == .single {
+                _ = controller.navigationController?.popViewController(animated: true)
             }
         }
 

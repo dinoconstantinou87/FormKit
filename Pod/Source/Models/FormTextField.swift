@@ -8,47 +8,47 @@
 
 import Foundation
 
-public class FormTextField: NSObject, FormRowTypeInteractable {
+open class FormTextField: NSObject, FormRowTypeInteractable {
  
     // MARK: - Properties
     
-    public var title: String?
-    public var text: String?
-    public var configureCell: ((cell: FormTextFieldCell) -> ())?
-    public var valueDidChange: ((String?) -> ())?
+    open var title: String?
+    open var text: String?
+    open var configureCell: ((_ cell: FormTextFieldCell) -> ())?
+    open var valueDidChange: ((String?) -> ())?
     
-    public weak var section: FormSection?
+    open weak var section: FormSection?
     
     // MARK: - Internal Methods
     
-    func valueDidChangeForTextField(textField: UITextField) {
+    @objc func valueDidChangeForTextField(_ textField: UITextField) {
         text = textField.text
         valueDidChange?(text)
     }
 
     // MARK: - FormRowType
     
-    public func registerTableViewCellForTableView(tableView: UITableView) {
-        tableView.registerClass(FormTextFieldCell.self, forCellReuseIdentifier: String(FormTextFieldCell.self))
+    open func registerTableViewCellForTableView(_ tableView: UITableView) {
+        tableView.register(FormTextFieldCell.self, forCellReuseIdentifier: String(describing: FormTextFieldCell.self))
     }
     
-    public func dequeueReusableTableViewCellForTableView(tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(String(FormTextFieldCell.self), forIndexPath: indexPath)
+    open func dequeueReusableTableViewCellForTableView(_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: String(describing: FormTextFieldCell.self), for: indexPath)
     }
     
-    public func configureTableViewCell(abstract: UITableViewCell) {
+    open func configureTableViewCell(_ abstract: UITableViewCell) {
         guard let cell = abstract as? FormTextFieldCell else { fatalError("Encountered unexpected cell type for FormTextField") }
-        cell.textField.clearButtonMode = .WhileEditing
+        cell.textField.clearButtonMode = .whileEditing
         cell.textField.placeholder = title
         cell.textField.text = text
-        cell.textField.addTarget(self, action: #selector(self.valueDidChangeForTextField(_:)), forControlEvents: .EditingChanged)
+        cell.textField.addTarget(self, action: #selector(self.valueDidChangeForTextField(_:)), for: .editingChanged)
         
-        configureCell?(cell: cell)
+        configureCell?(cell)
     }
     
     // MARK: - FormRowTypeInteractable
     
-    public func controller(controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: NSIndexPath) {
+    open func controller(_ controller: FormViewController, didSelectCell abstract: UITableViewCell, forIndexPath indexPath: IndexPath) {
         guard let cell = abstract as? FormTextFieldCell else { fatalError("Encountered unexpected cell type for FormTextField") }
         cell.textField.becomeFirstResponder()
     }
